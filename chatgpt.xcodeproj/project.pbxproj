@@ -21,7 +21,7 @@
 		C18BEE4B2A059FDA0008A931 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4A2A059FDA0008A931 /* Message.swift */; };
 		C18BEE4D2A05A0920008A931 /* ChatListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4C2A05A0920008A931 /* ChatListProtocols.swift */; };
 		C18BEE4F2A05A0F70008A931 /* ChatListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4E2A05A0F70008A931 /* ChatListBuilder.swift */; };
-		C18BEE532A05A2A20008A931 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE522A05A2A20008A931 /* ChatMessageView.swift */; };
+		C18BEE532A05A2A20008A931 /* ChatListMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE522A05A2A20008A931 /* ChatListMessageView.swift */; };
 		C18BEE562A065FFA0008A931 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE552A065FFA0008A931 /* ChatDetailView.swift */; };
 		C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +62,7 @@
 		C18BEE4A2A059FDA0008A931 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		C18BEE4C2A05A0920008A931 /* ChatListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListProtocols.swift; sourceTree = "<group>"; };
 		C18BEE4E2A05A0F70008A931 /* ChatListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListBuilder.swift; sourceTree = "<group>"; };
-		C18BEE522A05A2A20008A931 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		C18BEE522A05A2A20008A931 /* ChatListMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListMessageView.swift; sourceTree = "<group>"; };
 		C18BEE552A065FFA0008A931 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,17 +241,17 @@
 		C18BEE502A05A27D0008A931 /* CustonView */ = {
 			isa = PBXGroup;
 			children = (
-				C18BEE512A05A2860008A931 /* ChatLastMessage */,
+				C18BEE512A05A2860008A931 /* ChatListMessage */,
 			);
 			path = CustonView;
 			sourceTree = "<group>";
 		};
-		C18BEE512A05A2860008A931 /* ChatLastMessage */ = {
+		C18BEE512A05A2860008A931 /* ChatListMessage */ = {
 			isa = PBXGroup;
 			children = (
-				C18BEE522A05A2A20008A931 /* ChatMessageView.swift */,
+				C18BEE522A05A2A20008A931 /* ChatListMessageView.swift */,
 			);
-			path = ChatLastMessage;
+			path = ChatListMessage;
 			sourceTree = "<group>";
 		};
 		C18BEE542A065FE80008A931 /* ChatDetail */ = {
@@ -393,7 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C18BEE532A05A2A20008A931 /* ChatMessageView.swift in Sources */,
+				C18BEE532A05A2A20008A931 /* ChatListMessageView.swift in Sources */,
 				C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */,
 				C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */,
 				C18BEE452A059E720008A931 /* ChatListView.swift in Sources */,

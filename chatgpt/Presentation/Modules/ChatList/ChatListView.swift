@@ -16,12 +16,25 @@ struct ChatView: View {
                 ScrollViewReader { value in
                     ForEach(viewModel.chatItems) { item in
                         NavigationLink(destination: ChatDetailBuilder().build()) {
-                            ChatMessageView(message: item.message)
-                        }.buttonStyle(PlainButtonStyle()) 
+                            ChatListMessageView(message: item.message)
+                        }.buttonStyle(PlainButtonStyle())
                     }
                 }
-            }
+            }.navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Chats")
+                .toolbar {
+                    ToolbarItem {
+                        Button(action: newChat) {
+                            Label("Nuevo chat", systemImage: "square.and.pencil")
+                                .foregroundColor(.black)
+                        }
+                    }
+                }
         }
+    }
+
+    func newChat() {
+
     }
 }
 
