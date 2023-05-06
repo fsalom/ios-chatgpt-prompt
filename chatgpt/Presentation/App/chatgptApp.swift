@@ -13,7 +13,7 @@ struct chatgptApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ChatBuilder().build()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
