@@ -11,10 +11,14 @@ struct ChatView: View {
     var viewModel: ChatViewModelProtocol
 
     var body: some View {
-        ScrollView {
-            ScrollViewReader { value in
-                ForEach(viewModel.chatItems) { item in
-                    ChatMessageView(message: item.message)
+        NavigationView {
+            ScrollView {
+                ScrollViewReader { value in
+                    ForEach(viewModel.chatItems) { item in
+                        NavigationLink(destination: ChatDetailBuilder().build()) {
+                            ChatMessageView(message: item.message)
+                        }.buttonStyle(PlainButtonStyle()) 
+                    }
                 }
             }
         }

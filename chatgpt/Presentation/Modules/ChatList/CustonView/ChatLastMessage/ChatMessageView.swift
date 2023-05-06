@@ -37,17 +37,21 @@ struct ChatMessageView: View {
                     .fontWeight(.bold)
                 Text(message)
                     .font(.footnote)
-                    .frame(maxHeight: 50, alignment: .top)
+                    .frame(maxHeight: 60, alignment: .top)
                 Spacer()
             }
             Spacer()
             VStack(alignment: .trailing) {
                 Text("10:00")
                 Image(systemName: "arrowtriangle.forward.circle.fill")
-                    .padding(.top, 4)
+                    .foregroundColor(.gray)
+                    .frame(width: 10, height: 10)
+                    .padding(.top, 1)
             }
-        }.frame(maxWidth: .infinity)
+
+        }.frame(maxWidth: .infinity, maxHeight: 50)
             .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+        Divider().background(Color.gray)
     }
 
 }

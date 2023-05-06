@@ -16,12 +16,14 @@
 		C18BEE242A0587840008A931 /* chatgptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE232A0587840008A931 /* chatgptTests.swift */; };
 		C18BEE2E2A0587840008A931 /* chatgptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE2D2A0587840008A931 /* chatgptUITests.swift */; };
 		C18BEE302A0587840008A931 /* chatgptUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE2F2A0587840008A931 /* chatgptUITestsLaunchTests.swift */; };
-		C18BEE452A059E720008A931 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE442A059E720008A931 /* ChatView.swift */; };
-		C18BEE482A059F520008A931 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE472A059F520008A931 /* ChatViewModel.swift */; };
+		C18BEE452A059E720008A931 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE442A059E720008A931 /* ChatListView.swift */; };
+		C18BEE482A059F520008A931 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE472A059F520008A931 /* ChatListViewModel.swift */; };
 		C18BEE4B2A059FDA0008A931 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4A2A059FDA0008A931 /* Message.swift */; };
-		C18BEE4D2A05A0920008A931 /* ChatProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4C2A05A0920008A931 /* ChatProtocols.swift */; };
-		C18BEE4F2A05A0F70008A931 /* ChatBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4E2A05A0F70008A931 /* ChatBuilder.swift */; };
+		C18BEE4D2A05A0920008A931 /* ChatListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4C2A05A0920008A931 /* ChatListProtocols.swift */; };
+		C18BEE4F2A05A0F70008A931 /* ChatListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE4E2A05A0F70008A931 /* ChatListBuilder.swift */; };
 		C18BEE532A05A2A20008A931 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE522A05A2A20008A931 /* ChatMessageView.swift */; };
+		C18BEE562A065FFA0008A931 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE552A065FFA0008A931 /* ChatDetailView.swift */; };
+		C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,12 +57,14 @@
 		C18BEE292A0587840008A931 /* chatgptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chatgptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18BEE2D2A0587840008A931 /* chatgptUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatgptUITests.swift; sourceTree = "<group>"; };
 		C18BEE2F2A0587840008A931 /* chatgptUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatgptUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C18BEE442A059E720008A931 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		C18BEE472A059F520008A931 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		C18BEE442A059E720008A931 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		C18BEE472A059F520008A931 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		C18BEE4A2A059FDA0008A931 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		C18BEE4C2A05A0920008A931 /* ChatProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProtocols.swift; sourceTree = "<group>"; };
-		C18BEE4E2A05A0F70008A931 /* ChatBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBuilder.swift; sourceTree = "<group>"; };
+		C18BEE4C2A05A0920008A931 /* ChatListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListProtocols.swift; sourceTree = "<group>"; };
+		C18BEE4E2A05A0F70008A931 /* ChatListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListBuilder.swift; sourceTree = "<group>"; };
 		C18BEE522A05A2A20008A931 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		C18BEE552A065FFA0008A931 /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
+		C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,22 +203,23 @@
 		C18BEE422A0588740008A931 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C18BEE542A065FE80008A931 /* ChatDetail */,
 				C18BEE462A059F3C0008A931 /* Menu */,
-				C18BEE432A0588A70008A931 /* Chat */,
+				C18BEE432A0588A70008A931 /* ChatList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		C18BEE432A0588A70008A931 /* Chat */ = {
+		C18BEE432A0588A70008A931 /* ChatList */ = {
 			isa = PBXGroup;
 			children = (
 				C18BEE502A05A27D0008A931 /* CustonView */,
-				C18BEE442A059E720008A931 /* ChatView.swift */,
-				C18BEE472A059F520008A931 /* ChatViewModel.swift */,
-				C18BEE4C2A05A0920008A931 /* ChatProtocols.swift */,
-				C18BEE4E2A05A0F70008A931 /* ChatBuilder.swift */,
+				C18BEE442A059E720008A931 /* ChatListView.swift */,
+				C18BEE472A059F520008A931 /* ChatListViewModel.swift */,
+				C18BEE4C2A05A0920008A931 /* ChatListProtocols.swift */,
+				C18BEE4E2A05A0F70008A931 /* ChatListBuilder.swift */,
 			);
-			path = Chat;
+			path = ChatList;
 			sourceTree = "<group>";
 		};
 		C18BEE462A059F3C0008A931 /* Menu */ = {
@@ -247,6 +252,15 @@
 				C18BEE522A05A2A20008A931 /* ChatMessageView.swift */,
 			);
 			path = ChatLastMessage;
+			sourceTree = "<group>";
+		};
+		C18BEE542A065FE80008A931 /* ChatDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C18BEE552A065FFA0008A931 /* ChatDetailView.swift */,
+				C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */,
+			);
+			path = ChatDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,11 +396,13 @@
 				C18BEE532A05A2A20008A931 /* ChatMessageView.swift in Sources */,
 				C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */,
 				C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */,
-				C18BEE452A059E720008A931 /* ChatView.swift in Sources */,
-				C18BEE4D2A05A0920008A931 /* ChatProtocols.swift in Sources */,
+				C18BEE452A059E720008A931 /* ChatListView.swift in Sources */,
+				C18BEE4D2A05A0920008A931 /* ChatListProtocols.swift in Sources */,
 				C18BEE142A0587820008A931 /* ContentView.swift in Sources */,
-				C18BEE4F2A05A0F70008A931 /* ChatBuilder.swift in Sources */,
-				C18BEE482A059F520008A931 /* ChatViewModel.swift in Sources */,
+				C18BEE4F2A05A0F70008A931 /* ChatListBuilder.swift in Sources */,
+				C18BEE562A065FFA0008A931 /* ChatDetailView.swift in Sources */,
+				C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */,
+				C18BEE482A059F520008A931 /* ChatListViewModel.swift in Sources */,
 				C18BEE0F2A0587820008A931 /* Persistence.swift in Sources */,
 				C18BEE4B2A059FDA0008A931 /* Message.swift in Sources */,
 			);
@@ -557,7 +573,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
@@ -595,7 +611,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
