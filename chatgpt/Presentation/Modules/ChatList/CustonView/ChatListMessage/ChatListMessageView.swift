@@ -27,8 +27,9 @@ struct ChatListMessageView: View {
                         .frame(width: 50, height: 50, alignment: .top)
                 }
                 Circle()
+                    .strokeBorder(Color.white,lineWidth: 2)
+                    .background(Circle().foregroundColor(Color.green))
                     .frame(width: 10, height: 10)
-                    .foregroundColor(.green)
                     .offset(x: 17, y: 17)
             }
             VStack(alignment: .leading, spacing: 2) {
@@ -40,11 +41,7 @@ struct ChatListMessageView: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text("10:00")
-                Image(systemName: "arrowtriangle.forward.circle.fill")
-                    .foregroundColor(.gray)
-                    .frame(width: 10, height: 10)
-                    .padding(.top, 1)
+                Text("10:00").font(.footnote)
             }
 
         }.frame(maxWidth: .infinity)

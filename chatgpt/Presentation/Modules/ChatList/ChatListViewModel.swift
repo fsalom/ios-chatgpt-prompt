@@ -12,7 +12,7 @@ class ChatViewModel: ObservableObject, ChatViewModelProtocol {
 
     init() {
         self.chatItems.append(contentsOf: [ChatItem(isSentByUser: false, message: "Hola este es un mensaje"),
-                                           ChatItem(isSentByUser: false, message: "Adios este es otro mensaje pero más largo para probar el ancho"),
+                                           ChatItem(isSentByUser: true, message: "Adios este es otro mensaje pero más largo para probar el ancho"),
                                            ChatItem(isSentByUser: false, message: "Hola este es corto")])
     }
 }
