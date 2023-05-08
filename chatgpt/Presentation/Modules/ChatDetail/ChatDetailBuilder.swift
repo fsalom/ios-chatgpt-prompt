@@ -8,8 +8,9 @@
 import Foundation
 
 class ChatDetailBuilder {
-    func build() -> ChatDetailView {
-        let view = ChatDetailView()
+    func build() -> ChatDetailView<ChatDetailViewModel> {
+        let viewModel = ChatDetailViewModel()
+        let view = ChatDetailView(viewModel: viewModel)
         return view
     }
 }
