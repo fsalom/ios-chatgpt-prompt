@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1542D712A0CED8400E2EFAD /* ChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D702A0CED8400E2EFAD /* ChatUseCase.swift */; };
+		C1542D732A0CEE3800E2EFAD /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D722A0CEE3800E2EFAD /* ChatRepository.swift */; };
+		C1542D752A0CEEC700E2EFAD /* ChatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D742A0CEEC700E2EFAD /* ChatDataSource.swift */; };
 		C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE0C2A0587820008A931 /* chatgptApp.swift */; };
 		C18BEE0F2A0587820008A931 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE0E2A0587820008A931 /* Persistence.swift */; };
 		C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE102A0587820008A931 /* chatgpt.xcdatamodeld */; };
@@ -48,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C1542D702A0CED8400E2EFAD /* ChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUseCase.swift; sourceTree = "<group>"; };
+		C1542D722A0CEE3800E2EFAD /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
+		C1542D742A0CEEC700E2EFAD /* ChatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataSource.swift; sourceTree = "<group>"; };
 		C18BEE092A0587820008A931 /* chatgpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatgpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18BEE0C2A0587820008A931 /* chatgptApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatgptApp.swift; sourceTree = "<group>"; };
 		C18BEE0E2A0587820008A931 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -100,6 +106,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C1542D6D2A0CED5300E2EFAD /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				C1542D742A0CEEC700E2EFAD /* ChatDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		C1542D6E2A0CED6400E2EFAD /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				C1542D722A0CEE3800E2EFAD /* ChatRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		C1542D6F2A0CED7000E2EFAD /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				C1542D702A0CED8400E2EFAD /* ChatUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		C18BEE002A0587820008A931 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +199,8 @@
 		C18BEE3D2A05881B0008A931 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				C1542D6E2A0CED6400E2EFAD /* Repositories */,
+				C1542D6D2A0CED5300E2EFAD /* DataSource */,
 				C18BEE3E2A0588240008A931 /* Coredata */,
 			);
 			path = Data;
@@ -186,6 +218,7 @@
 		C18BEE3F2A0588510008A931 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				C1542D6F2A0CED7000E2EFAD /* UseCases */,
 				C18BEE492A059FC80008A931 /* Entities */,
 			);
 			path = Domain;
@@ -414,8 +447,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C18BEE532A05A2A20008A931 /* ChatListMessageView.swift in Sources */,
+				C1542D732A0CEE3800E2EFAD /* ChatRepository.swift in Sources */,
 				C18BEE5A2A0909260008A931 /* ChatDetailViewModel.swift in Sources */,
 				C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */,
+				C1542D752A0CEEC700E2EFAD /* ChatDataSource.swift in Sources */,
 				C18BEE5E2A0909930008A931 /* ChatMessage.swift in Sources */,
 				C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */,
 				C18BEE452A059E720008A931 /* ChatListView.swift in Sources */,
@@ -426,6 +461,7 @@
 				C18BEE5C2A09094D0008A931 /* ChatDetailProtocols.swift in Sources */,
 				C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */,
 				C18BEE482A059F520008A931 /* ChatListViewModel.swift in Sources */,
+				C1542D712A0CED8400E2EFAD /* ChatUseCase.swift in Sources */,
 				C18BEE0F2A0587820008A931 /* Persistence.swift in Sources */,
 				C18BEE612A0927630008A931 /* CharMessageView.swift in Sources */,
 				C18BEE4B2A059FDA0008A931 /* ChatItem.swift in Sources */,

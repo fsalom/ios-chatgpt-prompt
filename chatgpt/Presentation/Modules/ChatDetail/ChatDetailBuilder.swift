@@ -9,7 +9,12 @@ import Foundation
 
 class ChatDetailBuilder {
     func build() -> ChatDetailView<ChatDetailViewModel> {
+        let datasource = ChatDataSource()
+        let repository = ChatRepository(datasource: datasource)
+        let useCase = ChatUseCase(repository: repository)
+
         let viewModel = ChatDetailViewModel()
+        viewModel.useCase = useCase
         let view = ChatDetailView(viewModel: viewModel)
         return view
     }

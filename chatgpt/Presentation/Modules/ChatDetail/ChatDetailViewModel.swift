@@ -11,10 +11,17 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
     @Published var userNewMessage =  ""
     @Published var messages: [ChatMessage] = []
 
+    var useCase: ChatUseCaseProtocol!
+
     init() {
-        self.messages.append(contentsOf: [ChatMessage(isSentByUser: false, message: "Hola este es un mensaje"),
-                                           ChatMessage(isSentByUser: true, message: "Adios este es otro mensaje pero más largo para probar el ancho"),
-                                           ChatMessage(isSentByUser: false, message: "Hola este es corto")])
+        load()
+    }
+
+    func load() {
+        Task {
+            let messages = try await useCase.getMessages()
+            self.messages.append(contentsOf: messages)
+        }
     }
 
     func sendNewMessage() {
