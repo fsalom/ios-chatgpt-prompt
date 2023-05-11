@@ -13,8 +13,7 @@ class ChatDetailBuilder {
         let repository = ChatRepository(datasource: datasource)
         let useCase = ChatUseCase(repository: repository)
 
-        let viewModel = ChatDetailViewModel()
-        viewModel.useCase = useCase
+        let viewModel = ChatDetailViewModel(useCase: useCase)
         let view = ChatDetailView(viewModel: viewModel)
         return view
     }

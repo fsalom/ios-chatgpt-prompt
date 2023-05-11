@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ChatViewModelProtocol {
-    var chatItems: [ChatItem] { get set }
+protocol ChatListViewModelProtocol: ObservableObject  {
+    var chatItems: [Chat] { get set }
 }

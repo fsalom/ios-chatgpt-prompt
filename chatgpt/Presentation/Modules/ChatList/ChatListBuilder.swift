@@ -7,10 +7,15 @@
 
 import Foundation
 
-class ChatBuilder {
-    func build() -> ChatView {
-        let viewModel = ChatViewModel()
-        let view = ChatView(viewModel: viewModel)
+class ChatListBuilder {
+    func build() -> ChatListView<ChatListViewModel> {
+        let datasource = ChatDataSource()
+        let repository = ChatRepository(datasource: datasource)
+        let useCase = ChatUseCase(repository: repository)
+        
+        let viewModel = ChatListViewModel(useCase: useCase)
+        let view = ChatListView(viewModel: viewModel)
         return view
     }
 }
+

@@ -8,8 +8,8 @@
 import SwiftUI
 import Foundation
 
-struct ChatView: View {
-    var viewModel: ChatViewModelProtocol
+struct ChatListView<VM>: View where VM: ChatListViewModelProtocol {
+    @ObservedObject var viewModel: VM
 
     var body: some View {
         NavigationView {
@@ -17,7 +17,7 @@ struct ChatView: View {
                 ScrollViewReader { value in
                     ForEach(viewModel.chatItems) { item in
                         NavigationLink(destination: ChatDetailBuilder().build()) {
-                            ChatListMessageView(message: item.message)
+                            ChatListMessageView(chat: item)
                         }.buttonStyle(PlainButtonStyle())
                     }
                 }
@@ -41,6 +41,10 @@ struct ChatView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView(viewModel: ChatViewModel())
+        let datasource = ChatDataSource()
+        let repository = ChatRepository(datasource: datasource)
+        let useCase = ChatUseCase(repository: repository)
+
+        ChatListView(viewModel: ChatListViewModel(useCase: useCase))
     }
 }

@@ -47,6 +47,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     .disabled(viewModel.userNewMessage.isEmpty)
                 }
                 .padding()
+                .background(Color.gray.opacity(0.2))
             }
         }
     }
@@ -54,6 +55,10 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
 
 struct ChatDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatDetailView(viewModel: ChatDetailViewModel())
+        let datasource = ChatDataSource()
+        let repository = ChatRepository(datasource: datasource)
+        let useCase = ChatUseCase(repository: repository)
+
+        ChatDetailView(viewModel: ChatDetailViewModel(useCase: useCase))
     }
 }

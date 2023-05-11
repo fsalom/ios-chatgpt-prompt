@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ChatListMessageView: View {
 
-    var message: String
+    var chat: Chat
 
     var body: some View {
         HStack(alignment: .top) {
             ZStack {
-                AsyncImage(url: URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80")) { image in
+                AsyncImage(url: URL(string: chat.profileImage)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -33,15 +33,15 @@ struct ChatListMessageView: View {
                     .offset(x: 17, y: 17)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text("Fernando Salom")
+                Text(chat.name)
                     .fontWeight(.bold)
-                Text(message)
+                Text(chat.lastMessage)
                     .font(.footnote)
                     .lineLimit(2)
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text("10:00").font(.footnote)
+                Text(chat.lastUpdated).font(.footnote)
             }
 
         }.frame(maxWidth: .infinity)
@@ -54,7 +54,10 @@ struct ChatListMessageView: View {
 
 struct ChatMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListMessageView(message: "mensaje corto")
-        ChatListMessageView(message: "esto es un mensaje de prueba largo para probar como se comporta un texto largo")
+        ChatListMessageView(chat: Chat(name: "Fernando Salom",
+                                       online: true,
+                                       profileImage: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80",
+                                       lastUpdated: "10:01",
+                                       lastMessage: "message"))
     }
 }

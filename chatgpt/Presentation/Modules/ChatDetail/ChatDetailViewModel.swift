@@ -13,7 +13,8 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     var useCase: ChatUseCaseProtocol!
 
-    init() {
+    init(useCase: ChatUseCaseProtocol) {
+        self.useCase = useCase
         load()
     }
 

@@ -7,12 +7,20 @@
 
 import Foundation
 
-class ChatViewModel: ObservableObject, ChatViewModelProtocol {
-    var chatItems: [ChatItem] = []
+class ChatListViewModel: ObservableObject, ChatListViewModelProtocol {
+    var chatItems: [Chat] = []
 
-    init() {
-        self.chatItems.append(contentsOf: [ChatItem(isSentByUser: false, message: "Hola este es un mensaje"),
-                                           ChatItem(isSentByUser: true, message: "Adios este es otro mensaje pero más largo para probar el ancho"),
-                                           ChatItem(isSentByUser: false, message: "Hola este es corto")])
+    var useCase: ChatUseCaseProtocol!
+
+    init(useCase: ChatUseCaseProtocol) {
+        self.useCase = useCase
+        load()
+    }
+
+    func load() {
+        Task {
+            let chats = try await useCase.getChats()
+            self.chatItems.append(contentsOf: chats)
+        }
     }
 }

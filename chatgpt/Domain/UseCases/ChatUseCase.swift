@@ -10,6 +10,7 @@ import Foundation
 
 protocol ChatUseCaseProtocol {
     func getMessages() async throws -> [ChatMessage]
+    func getChats() async throws -> [Chat]
 }
 
 class ChatUseCase: ChatUseCaseProtocol {
@@ -21,5 +22,9 @@ class ChatUseCase: ChatUseCaseProtocol {
 
     func getMessages() async throws -> [ChatMessage] {
         try await repository.getMessages()
+    }
+
+    func getChats() async throws -> [Chat] {
+        try await repository.getChats()
     }
 }
