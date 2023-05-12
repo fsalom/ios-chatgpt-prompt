@@ -9,22 +9,36 @@ import Foundation
 
 
 protocol ChatUseCaseProtocol {
-    func getMessages() async throws -> [ChatMessage]
+    func getMessages() async throws -> [Message]
     func getChats() async throws -> [Chat]
+    func sendToGPT(this message: String, with context: [Message]) async throws -> Message
 }
 
 class ChatUseCase: ChatUseCaseProtocol {
-    var repository: ChatRepositoryProtocol
+    var chatRepository: ChatRepositoryProtocol
+    var gptRepository: GPTRepositoryProtocol
 
-    init(repository: ChatRepositoryProtocol) {
-        self.repository = repository
+    init(chatRepository: ChatRepositoryProtocol, gptRepository: GPTRepositoryProtocol) {
+        self.chatRepository = chatRepository
+        self.gptRepository = gptRepository
     }
 
-    func getMessages() async throws -> [ChatMessage] {
-        try await repository.getMessages()
+    func getMessages() async throws -> [Message] {
+        try await chatRepository.getMessages()
     }
 
     func getChats() async throws -> [Chat] {
-        try await repository.getChats()
+        try await chatRepository.getChats()
+    }
+
+    func sendToGPT(this message: String, with context: [Message]) async throws -> Message {
+        let messages = context.map { message in
+            MessageDTO(from: message)
+        }
+        if let message = try await gptRepository.send(this: message,
+                                                      and: messages) {
+            return Message(dto: message)
+        }
+        return Message(role: "assistant", isSentByUser: false, state: .error, content: "Error")
     }
 }

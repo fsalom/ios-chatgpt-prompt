@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ChatRepositoryProtocol {
-    func getMessages() async throws -> [ChatMessage]
+    func getMessages() async throws -> [Message]
     func getChats() async throws -> [Chat]
 }
 
@@ -19,7 +19,7 @@ class ChatRepository: ChatRepositoryProtocol {
         self.datasource = datasource
     }
 
-    func getMessages() async throws -> [ChatMessage] {
+    func getMessages() async throws -> [Message] {
         return try await datasource.getMessages()
     }
 

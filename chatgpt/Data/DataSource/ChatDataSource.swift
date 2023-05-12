@@ -8,17 +8,17 @@
 import Foundation
 
 protocol ChatDataSourceProtocol {
-    func getMessages() async throws -> [ChatMessage]
+    func getMessages() async throws -> [Message]
     func getChats() async throws -> [Chat]
 }
 
 
 class ChatDataSource: ChatDataSourceProtocol {
-    func getMessages() async throws -> [ChatMessage] {
-        return [ChatMessage(isSentByUser: true, message: "Hola Chat"),
-                ChatMessage(isSentByUser: false, message: "Hola Fer"),
-                ChatMessage(isSentByUser: true, message: "Cuanto es 1 + 1?"),
-                ChatMessage(isSentByUser: false, message: "el resultado es 2")]
+    func getMessages() async throws -> [Message] {
+        return [Message(role: "user", isSentByUser: true, state: .success, content: "Hola Chat"),
+                Message(role: "user", isSentByUser: false, state: .success, content: "Hola Fer"),
+                Message(role: "user", isSentByUser: true, state: .success, content: "Cuanto es 1 + 1?"),
+                Message(role: "user", isSentByUser: false, state: .success, content: "el resultado es 2")]
     }
 
     func getChats() async throws -> [Chat] {
