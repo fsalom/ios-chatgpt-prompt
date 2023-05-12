@@ -43,7 +43,11 @@ struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         let datasource = ChatDataSource()
         let repository = ChatRepository(datasource: datasource)
-        let useCase = ChatUseCase(repository: repository)
+
+        let GPTdatasource = GPTDataSource()
+        let GPTrepository = GPTRepository(datasource: GPTdatasource)
+
+        let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
 
         ChatListView(viewModel: ChatListViewModel(useCase: useCase))
     }

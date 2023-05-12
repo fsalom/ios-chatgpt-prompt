@@ -9,6 +9,6 @@ import Foundation
 
 protocol ChatDetailViewModelProtocol: ObservableObject {
     var userNewMessage: String { get set }
-    var messages: [ChatMessage] { get set }
+    var messages: [Message] { get set }
     func sendNewMessage()
 }

@@ -9,7 +9,7 @@ import Foundation
 
 class ChatDetailViewModel: ChatDetailViewModelProtocol {
     @Published var userNewMessage =  ""
-    @Published var messages: [ChatMessage] = []
+    @Published var messages: [Message] = []
 
     var useCase: ChatUseCaseProtocol!
 
@@ -26,7 +26,15 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
     }
 
     func sendNewMessage() {
-        self.messages.append(ChatMessage(isSentByUser: true, message: userNewMessage))
+        self.messages.append(Message(role: "user", isSentByUser: true, state: .success, content: userNewMessage))
+        Task {
+            do {
+                let message = try await useCase.sendToGPT(this: "enviado a chat GPT", with: messages)
+                messages.append(message)
+            } catch {
+
+            }
+        }
         userNewMessage = ""
     }
 }

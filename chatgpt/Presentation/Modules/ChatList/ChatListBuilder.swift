@@ -11,7 +11,11 @@ class ChatListBuilder {
     func build() -> ChatListView<ChatListViewModel> {
         let datasource = ChatDataSource()
         let repository = ChatRepository(datasource: datasource)
-        let useCase = ChatUseCase(repository: repository)
+
+        let GPTdatasource = GPTDataSource()
+        let GPTrepository = GPTRepository(datasource: GPTdatasource)
+
+        let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
         
         let viewModel = ChatListViewModel(useCase: useCase)
         let view = ChatListView(viewModel: viewModel)

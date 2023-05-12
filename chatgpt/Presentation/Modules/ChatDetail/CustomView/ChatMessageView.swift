@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CharMessageView: View {
-    var messageItem: ChatMessage
+struct ChatMessageView: View {
+    var messageItem: Message
     var body: some View {
         HStack(alignment: .center) {
             if messageItem.isSentByUser {
@@ -18,7 +18,7 @@ struct CharMessageView: View {
                     .foregroundColor(.gray)
             }
 
-            Text(messageItem.message).setStyle(isUser: messageItem.isSentByUser)
+            Text(messageItem.content ?? "").setStyle(isUser: messageItem.isSentByUser)
 
             if !messageItem.isSentByUser {
                 Text("12:00")
@@ -33,7 +33,7 @@ struct CharMessageView: View {
 
 struct CharMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        CharMessageView(messageItem: ChatMessage(isSentByUser: true, message: "Mensaje de usuario"))
+        ChatMessageView(messageItem: Message(role: "user", isSentByUser: true, state: .success, content: "Mensaje de usuario"))
     }
 }
 
