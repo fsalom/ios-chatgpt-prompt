@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatMessageView: View {
     var messageItem: Message
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .top) {
             if messageItem.isSentByUser {
                 Spacer()
                 Text("10:00")
@@ -66,32 +66,5 @@ fileprivate extension Text {
                     .fill(Color.blue)
             )
             .cornerRadius(15, corners: [.bottomRight, .topLeft, .topRight])
-    }
-}
-
-fileprivate struct CornerRadiusStyle: ViewModifier {
-    var radius: CGFloat
-    var corners: UIRectCorner
-
-    struct CornerRadiusShape: Shape {
-
-        var radius = CGFloat.infinity
-        var corners = UIRectCorner.allCorners
-
-        func path(in rect: CGRect) -> Path {
-            let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-            return Path(path.cgPath)
-        }
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .clipShape(CornerRadiusShape(radius: radius, corners: corners))
-    }
-}
-
-fileprivate extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        ModifiedContent(content: self, modifier: CornerRadiusStyle(radius: radius, corners: corners))
     }
 }

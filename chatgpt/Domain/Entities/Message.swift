@@ -22,7 +22,7 @@ struct MessageContent {
     var type: MessageType
 }
 
-struct Message: Identifiable, Equatable {
+class Message: Identifiable, Equatable {
     static func == (lhs: Message, rhs: Message) -> Bool {
         lhs.id == rhs.id
     }
@@ -42,14 +42,6 @@ struct Message: Identifiable, Equatable {
         isSentByUser = false
     }
 
-    mutating func evaluate(this text: String){
-        let tokens = text.split(separator: "```")
-        for (index, token) in tokens.enumerated() {
-            contents.append(MessageContent(text: String(token),
-                                           type: index % 2 == 0 ? .text : .code))
-        }
-    }
-
     init(role: String, isSentByUser: Bool, state: MessageState, content: String){
         self.isSentByUser = isSentByUser
         self.state = state
@@ -57,18 +49,4 @@ struct Message: Identifiable, Equatable {
         self.role = role
         self.content = content
     }
-
-    func getString(_ string: String,
-                   between start: String,
-                   and end: String) -> String? {
-        guard let startIndex = string.range(of: start)?.upperBound else {
-            return nil
-        }
-        guard let endIndex = string.range(of: end, range: startIndex..<string.endIndex)?.lowerBound else {
-            return nil
-        }
-        let substring = string.substring(with: startIndex..<endIndex)
-        return substring
-    }
-
 }

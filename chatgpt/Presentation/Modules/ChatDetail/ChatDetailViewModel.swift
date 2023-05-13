@@ -27,10 +27,15 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     func sendNewMessage() {
         self.messages.append(Message(role: "user", isSentByUser: true, state: .success, content: userNewMessage))
+        let message = Message(role: "assistant", isSentByUser: false, state: .loading, content: "")
+        messages.append(message)
         Task {
             do {
-                let message = try await useCase.sendToGPT(this: "enviado a chat GPT", with: messages)
-                messages.append(message)
+                let gptmessage = try await useCase.sendToGPT(this: "enviado a chat GPT", with: messages)
+                await MainActor.run {
+                    messages.removeAll(where: { $0.id == message.id })                    
+                    messages.append(gptmessage)
+                }
             } catch {
 
             }

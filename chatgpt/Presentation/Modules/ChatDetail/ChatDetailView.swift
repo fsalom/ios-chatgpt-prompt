@@ -19,7 +19,14 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         ForEach(viewModel.messages, id: \.id) { message in
                             HStack {
                                 if message.isSentByUser { Spacer() }
-                                ChatMessageView(messageItem: message).id(message.id)
+                                switch message.state {
+                                case .success:
+                                    ChatMessageView(messageItem: message).id(message.id)
+                                case .error:
+                                    ChatMessageErrorView().id(message.id)
+                                case .loading:
+                                    ChatMessageLoadingView()
+                                }
                                 if !message.isSentByUser { Spacer() }
                             }
                         }
