@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ChatListMessageView: View {
 
@@ -14,7 +15,7 @@ struct ChatListMessageView: View {
     var body: some View {
         HStack(alignment: .top) {
             ZStack {
-                AsyncImage(url: URL(string: chat.profileImage)) { image in
+                AsyncImage(url: URL(string: "chat.image")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -35,13 +36,13 @@ struct ChatListMessageView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(chat.name)
                     .fontWeight(.bold)
-                Text(chat.lastMessage)
+                Text("chat.lastUpdated")
                     .font(.footnote)
                     .lineLimit(2)
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text(chat.lastUpdated).font(.footnote)
+                Text("chat.lastUpdated").font(.footnote)
             }
 
         }.frame(maxWidth: .infinity)
@@ -54,10 +55,6 @@ struct ChatListMessageView: View {
 
 struct ChatMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListMessageView(chat: Chat(name: "Fernando Salom",
-                                       online: true,
-                                       profileImage: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80",
-                                       lastUpdated: "10:01",
-                                       lastMessage: "message"))
+        ChatListMessageView(chat: Chat(context: PersistenceController.shared.container.viewContext))
     }
 }
