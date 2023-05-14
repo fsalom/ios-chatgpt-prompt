@@ -10,6 +10,7 @@ import Foundation
 protocol ChatRepositoryProtocol {
     func getMessages() async throws -> [Message]
     func getChats() async throws -> [Chat]
+    func create(with name: String, image: Data, prompt: String) async throws
 }
 
 class ChatRepository: ChatRepositoryProtocol {
@@ -21,6 +22,10 @@ class ChatRepository: ChatRepositoryProtocol {
 
     func getMessages() async throws -> [Message] {
         return try await datasource.getMessages()
+    }
+
+    func create(with name: String, image: Data, prompt: String) async throws {
+        return try await datasource.create(with: name, image: image, prompt: prompt)
     }
 
     func getChats() async throws -> [Chat] {
