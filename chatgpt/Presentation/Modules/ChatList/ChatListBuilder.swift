@@ -9,7 +9,7 @@ import Foundation
 
 class ChatListBuilder {
     func build() -> ChatListView<ChatListViewModel> {
-        let datasource = ChatDataSource()
+        let datasource = ChatCoreDataSource()
         let repository = ChatRepository(datasource: datasource)
 
         let GPTdatasource = GPTDataSource()

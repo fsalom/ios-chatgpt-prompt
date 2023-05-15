@@ -8,5 +8,6 @@
 import Foundation
 
 protocol ChatListViewModelProtocol: ObservableObject  {
-    var chatItems: [Chat] { get set }
+    var chats: [Chat] { get set }
+    func load()
 }

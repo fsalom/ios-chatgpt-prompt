@@ -15,27 +15,27 @@ struct ChatListView<VM>: View where VM: ChatListViewModelProtocol {
         NavigationView {
             ScrollView {
                 ScrollViewReader { value in
-                    ForEach(viewModel.chatItems) { item in
+                    ForEach(viewModel.chats, id: \.id) { item in
                         NavigationLink(destination: ChatDetailBuilder().build()) {
                             ChatListMessageView(chat: item)
                         }.buttonStyle(PlainButtonStyle())
+                    }.onAppear {
+                        viewModel.load()
                     }
                 }
             }.navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Chats")
                 .toolbar {
                     ToolbarItem {
-                        Button(action: newChat) {
+                        NavigationLink {
+                            ChatNewBuilder().build()
+                        } label: {
                             Label("Nuevo chat", systemImage: "square.and.pencil")
                                 .foregroundColor(.black)
                         }
                     }
                 }
         }
-    }
-
-    func newChat() {
-
     }
 }
 
