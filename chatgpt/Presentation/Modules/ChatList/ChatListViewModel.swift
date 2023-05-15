@@ -6,21 +6,31 @@
 //
 
 import Foundation
+import CoreData
 
 class ChatListViewModel: ObservableObject, ChatListViewModelProtocol {
-    var chatItems: [Chat] = []
-
+    @Published var chats: [Chat]
+    let container = NSPersistentContainer(name: "Chat")
+    
     var useCase: ChatUseCaseProtocol!
 
     init(useCase: ChatUseCaseProtocol) {
         self.useCase = useCase
-        load()
+        self.chats = []
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print("Core Data failed to load: \(error.localizedDescription)")
+            }
+        }
     }
-
+    
     func load() {
         Task {
             let chats = try await useCase.getChats()
-            self.chatItems.append(contentsOf: chats)
+
+            await MainActor.run {
+                self.chats = chats
+            }
         }
     }
 }

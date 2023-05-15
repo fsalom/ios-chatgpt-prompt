@@ -36,13 +36,13 @@ struct ChatListMessageView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(chat.name)
                     .fontWeight(.bold)
-                Text("chat.lastUpdated")
+                Text(chat.prompt)
                     .font(.footnote)
                     .lineLimit(2)
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text("chat.lastUpdated").font(.footnote)
+                Text(chat.lastUpdated.formatted(.relative(presentation: .named))).font(.footnote)
             }
 
         }.frame(maxWidth: .infinity)

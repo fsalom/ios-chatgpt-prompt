@@ -16,12 +16,17 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
 
     func getChats() async throws -> [Chat] {
         let request: NSFetchRequest<Chat> = Chat.fetchRequest()
-        return try PersistenceController.shared.container.viewContext.fetch(request)
+        let sort = NSSortDescriptor(key: "lastUpdated", ascending: false)
+        request.returnsObjectsAsFaults = false
+        request.sortDescriptors = [sort]
+        let chats = try PersistenceController.shared.container.viewContext.fetch(request)
+        return chats
     }
 
     func create(with name: String, image: Data, prompt: String) async throws {
         let context = PersistenceController.shared.container.viewContext
         let chat = Chat(context: context)
+        chat.id = UUID().uuidString
         chat.name = name
         chat.profileImage = image
         chat.prompt = prompt
