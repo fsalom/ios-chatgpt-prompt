@@ -25,6 +25,10 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
                                 .frame(width: 50, height: 50)
                                 .foregroundColor(.green)
                             if let avatarImage {
+                                if let data = avatarImage.toUIImage().pngData() {
+                                    //viewModel.image = data
+                                }
+
                                 avatarImage
                                     .resizable()
                                     .scaledToFill()
@@ -75,6 +79,7 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
 }
 
 struct ChatNewView_Previews: PreviewProvider {
+
     static var previews: some View {
         let datasource = ChatDataSource()
         let repository = ChatRepository(datasource: datasource)
@@ -82,5 +87,20 @@ struct ChatNewView_Previews: PreviewProvider {
         let useCase = ChatUseCase(chatRepository: repository)
         let vm = ChatNewViewModel(useCase: useCase)
         ChatNewView(viewModel: vm)
+    }
+}
+
+fileprivate extension Image {
+    func toUIImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+
+        let renderer = UIGraphicsImageRenderer(size: view!.bounds.size)
+        let image = renderer.image { _ in
+            view?.drawHierarchy(in: view!.bounds, afterScreenUpdates: true)
+        }
+
+        return image
     }
 }

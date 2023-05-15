@@ -10,5 +10,6 @@ import Foundation
 protocol ChatNewViewModelProtocol: ObservableObject {
     var name: String { get set }
     var prompt: String { get set }
+    var image: Data { get set }
     func create() async throws
 }

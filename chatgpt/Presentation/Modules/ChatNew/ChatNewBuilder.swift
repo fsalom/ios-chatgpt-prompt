@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ChatNewBuilder {
     func build() -> ChatNewView<ChatNewViewModel> {
