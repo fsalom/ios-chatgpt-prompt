@@ -12,7 +12,7 @@ protocol ChatUseCaseProtocol {
     func getMessages() async throws -> [Message]
     func getChats() async throws -> [Chat]
     func sendToGPT(this message: String, with context: [Message]) async throws -> Message
-    func create(with name: String, image: Data, prompt: String) async throws
+    func create(with name: String, image: Data?, prompt: String) async throws
 }
 
 class ChatUseCase: ChatUseCaseProtocol {
@@ -43,7 +43,7 @@ class ChatUseCase: ChatUseCaseProtocol {
         return Message(role: "assistant", isSentByUser: false, state: .error, content: "Error")
     }
 
-    func create(with name: String, image: Data, prompt: String) async throws {
+    func create(with name: String, image: Data?, prompt: String) async throws {
         try await chatRepository.create(with: name, image: image, prompt: prompt)
     }
 }
