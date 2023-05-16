@@ -25,10 +25,6 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
                                 .frame(width: 50, height: 50)
                                 .foregroundColor(.green)
                             if let avatarImage {
-                                if let data = avatarImage.toUIImage().pngData() {
-                                    //viewModel.image = data
-                                }
-
                                 avatarImage
                                     .resizable()
                                     .scaledToFill()
@@ -65,6 +61,7 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
         }.onChange(of: avatarItem) { _ in
             Task {
                 if let data = try? await avatarItem?.loadTransferable(type: Data.self) {
+                    viewModel.image = data
                     if let uiImage = UIImage(data: data) {
                         avatarImage = Image(uiImage: uiImage)
                         return
@@ -75,8 +72,9 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
             }
         }
     }
-
 }
+
+
 
 struct ChatNewView_Previews: PreviewProvider {
 

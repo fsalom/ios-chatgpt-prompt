@@ -28,6 +28,7 @@
 		C1542DA42A0FEDCD00E2EFAD /* ChatNewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DA32A0FEDCD00E2EFAD /* ChatNewViewModel.swift */; };
 		C1542DA62A0FEE0100E2EFAD /* ChatNewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DA52A0FEE0100E2EFAD /* ChatNewProtocols.swift */; };
 		C1542DA82A1007B400E2EFAD /* ChatCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DA72A1007B400E2EFAD /* ChatCoreDataSource.swift */; };
+		C1542DE92A12611900E2EFAD /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DE82A12611900E2EFAD /* Image+Data.swift */; };
 		C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE0C2A0587820008A931 /* chatgptApp.swift */; };
 		C18BEE0F2A0587820008A931 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE0E2A0587820008A931 /* Persistence.swift */; };
 		C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE102A0587820008A931 /* chatgpt.xcdatamodeld */; };
@@ -87,6 +88,7 @@
 		C1542DA32A0FEDCD00E2EFAD /* ChatNewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNewViewModel.swift; sourceTree = "<group>"; };
 		C1542DA52A0FEE0100E2EFAD /* ChatNewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNewProtocols.swift; sourceTree = "<group>"; };
 		C1542DA72A1007B400E2EFAD /* ChatCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoreDataSource.swift; sourceTree = "<group>"; };
+		C1542DE82A12611900E2EFAD /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		C18BEE092A0587820008A931 /* chatgpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatgpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18BEE0C2A0587820008A931 /* chatgptApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatgptApp.swift; sourceTree = "<group>"; };
 		C18BEE0E2A0587820008A931 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -220,6 +222,14 @@
 			path = ChatNew;
 			sourceTree = "<group>";
 		};
+		C1542DE72A12610D00E2EFAD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C1542DE82A12611900E2EFAD /* Image+Data.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C18BEE002A0587820008A931 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +253,7 @@
 		C18BEE0B2A0587820008A931 /* chatgpt */ = {
 			isa = PBXGroup;
 			children = (
+				C1542DE72A12610D00E2EFAD /* Helpers */,
 				C1542D952A0E403C00E2EFAD /* Modifier */,
 				C18BEE172A0587840008A931 /* chatgpt.entitlements */,
 				C1542D802A0D258900E2EFAD /* Config */,
@@ -541,6 +552,7 @@
 				C18BEE532A05A2A20008A931 /* ChatListMessageView.swift in Sources */,
 				C1542D732A0CEE3800E2EFAD /* ChatRepository.swift in Sources */,
 				C18BEE5A2A0909260008A931 /* ChatDetailViewModel.swift in Sources */,
+				C1542DE92A12611900E2EFAD /* Image+Data.swift in Sources */,
 				C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */,
 				C1542D8C2A0D271400E2EFAD /* GPTRepository.swift in Sources */,
 				C1542D752A0CEEC700E2EFAD /* ChatDataSource.swift in Sources */,

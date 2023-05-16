@@ -11,7 +11,7 @@ import Foundation
 class ChatNewViewModel: ChatNewViewModelProtocol {
     @Published var name =  ""
     @Published var prompt =  ""
-    var image: Data = Data()
+    @Published var image: Data?
 
     var useCase: ChatUseCaseProtocol!
 

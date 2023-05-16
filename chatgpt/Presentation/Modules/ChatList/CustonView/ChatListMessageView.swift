@@ -15,17 +15,21 @@ struct ChatListMessageView: View {
     var body: some View {
         HStack(alignment: .top) {
             ZStack {
-                AsyncImage(url: URL(string: "chat.image")) { image in
+                if let image = Image(data: chat.profileImage) {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                         .frame(width: 50, height: 50, alignment: .top)
-
-                } placeholder: {
-                    ProgressView()
-                        .clipShape(Circle())
+                } else {
+                    Circle()
                         .frame(width: 50, height: 50, alignment: .top)
+                        .foregroundColor(.gray)
+                    Image(systemName: "photo")
+                        .foregroundColor(.white)
+                        .imageScale(.small)
+                        .frame(width: 44, height: 40)
+
                 }
                 Circle()
                     .strokeBorder(Color.white,lineWidth: 2)

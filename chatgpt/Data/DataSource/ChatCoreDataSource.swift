@@ -23,12 +23,14 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         return chats
     }
 
-    func create(with name: String, image: Data, prompt: String) async throws {
+    func create(with name: String, image: Data?, prompt: String) async throws {
         let context = PersistenceController.shared.container.viewContext
         let chat = Chat(context: context)
         chat.id = UUID().uuidString
         chat.name = name
-        chat.profileImage = image
+        if let image {
+            chat.profileImage = image
+        }
         chat.prompt = prompt
         chat.lastUpdated = Date()
         do {
