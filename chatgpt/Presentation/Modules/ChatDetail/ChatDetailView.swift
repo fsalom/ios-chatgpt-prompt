@@ -66,7 +66,8 @@ struct ChatDetailView_Previews: PreviewProvider {
         let GPTrepository = GPTRepository(datasource: GPTdatasource)
 
         let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
-
-        ChatDetailView(viewModel: ChatDetailViewModel(useCase: useCase))
+        let prompt = "example"
+        ChatDetailView(viewModel: ChatDetailViewModel(with: prompt,
+                                                      and: useCase))
     }
 }

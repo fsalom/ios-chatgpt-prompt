@@ -8,7 +8,7 @@
 import Foundation
 
 class ChatDetailBuilder {
-    func build() -> ChatDetailView<ChatDetailViewModel> {
+    func build(with prompt: String) -> ChatDetailView<ChatDetailViewModel> {
         let datasource = ChatDataSource()
         let repository = ChatRepository(datasource: datasource)
 
@@ -17,7 +17,7 @@ class ChatDetailBuilder {
 
         let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
 
-        let viewModel = ChatDetailViewModel(useCase: useCase)
+        let viewModel = ChatDetailViewModel(with: prompt, and: useCase)
         let view = ChatDetailView(viewModel: viewModel)
         return view
     }

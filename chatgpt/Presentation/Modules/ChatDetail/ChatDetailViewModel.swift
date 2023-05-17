@@ -13,8 +13,12 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     var useCase: ChatUseCaseProtocol!
 
-    init(useCase: ChatUseCaseProtocol) {
+    init(with prompt: String, and useCase: ChatUseCaseProtocol) {
         self.useCase = useCase
+        self.messages.append(Message(role: "user",
+                                     isSentByUser: true,
+                                     state: .success,
+                                     content: prompt))
         load()
     }
 
