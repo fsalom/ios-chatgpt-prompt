@@ -30,7 +30,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                                 if !message.isSentByUser { Spacer() }
                             }
                         }
-                        .padding(.bottom, 60) // Ajusta el valor de la almohadilla inferior según sea necesario
+                        .padding(.bottom, 60)
                     }.onAppear {
                         value.scrollTo(viewModel.messages.last?.id)
                     }
@@ -39,16 +39,37 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     }
                 }
 
-                HStack {
+                HStack(alignment: .bottom) {
                     TextField("Escribe aquí...",
-                              text: $viewModel.userNewMessage)
+                              text: $viewModel.userNewMessage,
+                              axis: .vertical).lineLimit(4)
                     .onSubmit {
                         viewModel.sendNewMessage()
+                    }.padding(10)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(lineWidth: 1).fill(Color.gray)
+                        )
+                        .foregroundColor(.black)
+
+
+                    if viewModel.userNewMessage.isEmpty {
+                        Button("Enviar") {
+                            viewModel.sendNewMessage()
+                        }.disabled(viewModel.userNewMessage.isEmpty)
+                    } else {
+                        Button {
+                            viewModel.sendNewMessage()
+                        } label: {
+                            Image(systemName: "paperplane.fill")
+                        } .frame(width: 40, height: 40)
+                            .foregroundColor(Color.white)
+                            .background(Color.blue)
+                            .clipShape(Circle())
+                            .disabled(viewModel.userNewMessage.isEmpty)
                     }
-                    Button("Enviar") {
-                        viewModel.sendNewMessage()
-                    }
-                    .disabled(viewModel.userNewMessage.isEmpty)
+
                 }
                 .padding()
                 .background(Color.gray.opacity(0.2))

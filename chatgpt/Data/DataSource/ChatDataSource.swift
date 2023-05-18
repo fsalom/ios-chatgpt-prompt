@@ -17,7 +17,7 @@ protocol ChatDataSourceProtocol {
 
 class ChatDataSource: ChatDataSourceProtocol {
     func getMessages() async throws -> [Message] {
-        return [Message(role: "user", isSentByUser: true, state: .success, content: "Hola a partir de ahora quiero que actues como si fuera un extraterrestre con un vocabulario muy limitado")]
+        return []
     }
 
     func create(with name: String, image: Data?, prompt: String) async throws {

@@ -11,7 +11,7 @@ import CoreData
 class ChatCoreDataSource: ChatDataSourceProtocol {
 
     func getMessages() async throws -> [Message] {
-        return [Message(role: "user", isSentByUser: true, state: .success, content: "Hola a partir de ahora quiero que actues como si fuera un extraterrestre con un vocabulario muy limitado")]
+        return []
     }
 
     func getChats() async throws -> [Chat] {
