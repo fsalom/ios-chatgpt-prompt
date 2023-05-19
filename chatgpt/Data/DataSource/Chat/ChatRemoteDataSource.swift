@@ -8,13 +8,6 @@
 import Foundation
 import CoreData
 
-protocol ChatDataSourceProtocol {
-    func getMessages() async throws -> [Message]
-    func getChats() async throws -> [Chat]
-    func create(with name: String, image: Data?, prompt: String) async throws
-}
-
-
 class ChatDataSource: ChatDataSourceProtocol {
     func getMessages() async throws -> [Message] {
         return []

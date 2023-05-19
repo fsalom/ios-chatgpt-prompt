@@ -10,6 +10,12 @@ import CoreData
 
 class ChatCoreDataSource: ChatDataSourceProtocol {
 
+    var context: NSManagedObjectContext
+
+    init(context: NSManagedObjectContext) {
+        self.context = context
+    }
+
     func getMessages() async throws -> [Message] {
         return []
     }
@@ -19,16 +25,15 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         let sort = NSSortDescriptor(key: "lastUpdated", ascending: false)
         request.returnsObjectsAsFaults = false
         request.sortDescriptors = [sort]
-        let chatsCD = try PersistenceController.shared.container.viewContext.fetch(request)
+        let chatsCD = try context.fetch(request)
         var chats: [Chat] = []
         for chat in chatsCD {
-            chats.append(Chat(cD: chat))
+            chats.append(Chat(with: chat))
         }
         return chats
     }
 
     func create(with name: String, image: Data?, prompt: String) async throws {
-        let context = PersistenceController.shared.container.viewContext
         let chat = ChatCD(context: context)
         chat.id = UUID().uuidString
         chat.name = name

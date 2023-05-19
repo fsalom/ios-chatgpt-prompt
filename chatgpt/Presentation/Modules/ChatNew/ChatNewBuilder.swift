@@ -10,7 +10,7 @@ import SwiftUI
 
 class ChatNewBuilder {
     func build() -> ChatNewView<ChatNewViewModel> {
-        let datasource = ChatCoreDataSource()
+        let datasource = ChatCoreDataSource(context: PersistenceController.shared.container.viewContext)
         let repository = ChatRepository(datasource: datasource)
 
         let useCase = ChatUseCase(chatRepository: repository)

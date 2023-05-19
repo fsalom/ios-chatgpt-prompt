@@ -15,12 +15,12 @@ struct Chat: Identifiable {
     var prompt: String
     var lastUpdated: Date
 
-    init(cD: ChatCD) {
-        self.profileImage = cD.profileImage
-        self.id = cD.id
-        self.name = cD.name
-        self.prompt = cD.prompt
-        self.lastUpdated = cD.lastUpdated
+    init(with coredata: ChatCD) {
+        self.profileImage = coredata.profileImage
+        self.id = coredata.id
+        self.name = coredata.name
+        self.prompt = coredata.prompt
+        self.lastUpdated = coredata.lastUpdated
     }
 
     init(profileImage: Data, name: String, id: String, prompt: String, lastUpdated: Date) {

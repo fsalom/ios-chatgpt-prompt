@@ -9,7 +9,7 @@ import Foundation
 
 class ChatListBuilder {
     func build() -> ChatListView<ChatListViewModel> {
-        let datasource = ChatCoreDataSource()
+        let datasource = ChatCoreDataSource(context: PersistenceController.shared.container.viewContext)
         let repository = ChatRepository(datasource: datasource)
 
         let GPTdatasource = GPTDataSource()
