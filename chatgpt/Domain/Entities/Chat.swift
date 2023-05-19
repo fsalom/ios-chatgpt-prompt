@@ -2,38 +2,32 @@
 //  Chat.swift
 //  chatgpt
 //
-//  Created by Fernando Salom Carratala on 11/5/23.
+//  Created by Fernando Salom Carratala on 19/5/23.
 //
 
 import Foundation
 
 
-import CoreData
+struct Chat: Identifiable {
+    var profileImage: Data
+    var id: String
+    var name: String
+    var prompt: String
+    var lastUpdated: Date
 
-@objc(Chat)
-public class Chat: NSManagedObject, Identifiable {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Chat> {
-        return NSFetchRequest<Chat>(entityName: "Chat")
+    init(cD: ChatCD) {
+        self.profileImage = cD.profileImage
+        self.id = cD.id
+        self.name = cD.name
+        self.prompt = cD.prompt
+        self.lastUpdated = cD.lastUpdated
     }
 
-    @NSManaged public var profileImage: Data
-    @NSManaged public var id: String
-    @NSManaged public var name: String
-    @NSManaged public var prompt: String
-    @NSManaged public var lastUpdated: Date
-
-    // Other functions and stuff
+    init(profileImage: Data, name: String, id: String, prompt: String, lastUpdated: Date) {
+        self.profileImage = profileImage
+        self.id = id
+        self.name = name
+        self.prompt = prompt
+        self.lastUpdated = lastUpdated
+    }
 }
-
-
-/*
-struct Chat: Identifiable {
-    let id = UUID()
-    let name: String
-    let online: Bool
-    let profileImage: String
-    let lastUpdated: String
-    let lastMessage: String
-}
- */
-

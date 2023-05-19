@@ -59,6 +59,6 @@ struct ChatListMessageView: View {
 
 struct ChatMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListMessageView(chat: Chat(context: PersistenceController.shared.container.viewContext))
+        ChatListMessageView(chat: Chat(profileImage: Data(), name: "", id: "", prompt: "", lastUpdated: Date()))
     }
 }

@@ -62,7 +62,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         Button {
                             viewModel.sendNewMessage()
                         } label: {
-                            Image(systemName: "paperplane.fill")
+                            Image(systemName: "paperplane.fill").rotationEffect(Angle(degrees: 45))
                         } .frame(width: 40, height: 40)
                             .foregroundColor(Color.white)
                             .background(Color.blue)
