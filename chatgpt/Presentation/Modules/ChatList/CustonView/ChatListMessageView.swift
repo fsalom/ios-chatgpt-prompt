@@ -18,9 +18,9 @@ struct ChatListMessageView: View {
                 if let image = Image(data: chat.profileImage) {
                     image
                         .resizable()
+                        .frame(width: 50, height: 50, alignment: .top)
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
-                        .frame(width: 50, height: 50, alignment: .top)
                 } else {
                     Circle()
                         .frame(width: 50, height: 50, alignment: .top)
@@ -29,7 +29,6 @@ struct ChatListMessageView: View {
                         .foregroundColor(.white)
                         .imageScale(.small)
                         .frame(width: 44, height: 40)
-
                 }
                 Circle()
                     .strokeBorder(Color.white,lineWidth: 2)
@@ -59,6 +58,10 @@ struct ChatListMessageView: View {
 
 struct ChatMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListMessageView(chat: Chat(profileImage: Data(), name: "", id: "", prompt: "", lastUpdated: Date()))
+        ChatListMessageView(chat: Chat(profileImage: Data(),
+                                       name: "",
+                                       id: "",
+                                       prompt: "",
+                                       lastUpdated: Date()))
     }
 }

@@ -15,7 +15,7 @@
 		C1542D772A0CF1B700E2EFAD /* ChatCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D762A0CF1B700E2EFAD /* ChatCD.swift */; };
 		C1542D792A0D223700E2EFAD /* GPTDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D782A0D223700E2EFAD /* GPTDataSource.swift */; };
 		C1542D7C2A0D255100E2EFAD /* TripleA in Frameworks */ = {isa = PBXBuildFile; productRef = C1542D7B2A0D255100E2EFAD /* TripleA */; };
-		C1542D7F2A0D257A00E2EFAD /* ChatGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D7E2A0D257A00E2EFAD /* ChatGPT.swift */; };
+		C1542D7F2A0D257A00E2EFAD /* ChatGPTDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D7E2A0D257A00E2EFAD /* ChatGPTDTO.swift */; };
 		C1542D822A0D259A00E2EFAD /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D812A0D259A00E2EFAD /* Configuration.swift */; };
 		C1542D882A0D268E00E2EFAD /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D872A0D268E00E2EFAD /* ChatMessageView.swift */; };
 		C1542D8A2A0D26C400E2EFAD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D892A0D26C400E2EFAD /* Message.swift */; };
@@ -77,7 +77,7 @@
 		C1542D742A0CEEC700E2EFAD /* ChatRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRemoteDataSource.swift; sourceTree = "<group>"; };
 		C1542D762A0CF1B700E2EFAD /* ChatCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCD.swift; sourceTree = "<group>"; };
 		C1542D782A0D223700E2EFAD /* GPTDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTDataSource.swift; sourceTree = "<group>"; };
-		C1542D7E2A0D257A00E2EFAD /* ChatGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPT.swift; sourceTree = "<group>"; };
+		C1542D7E2A0D257A00E2EFAD /* ChatGPTDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTDTO.swift; sourceTree = "<group>"; };
 		C1542D812A0D259A00E2EFAD /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		C1542D872A0D268E00E2EFAD /* ChatMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		C1542D892A0D26C400E2EFAD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		C1542D7D2A0D256400E2EFAD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				C1542D7E2A0D257A00E2EFAD /* ChatGPT.swift */,
+				C1542D7E2A0D257A00E2EFAD /* ChatGPTDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 				C1542DA82A1007B400E2EFAD /* ChatCoreDataSource.swift in Sources */,
 				C1542D772A0CF1B700E2EFAD /* ChatCD.swift in Sources */,
 				C14EFEBC2A179F7D00BA5C82 /* Chat.swift in Sources */,
-				C1542D7F2A0D257A00E2EFAD /* ChatGPT.swift in Sources */,
+				C1542D7F2A0D257A00E2EFAD /* ChatGPTDTO.swift in Sources */,
 				C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */,
 				C1542D922A0E3EED00E2EFAD /* ChatMessageErrorView.swift in Sources */,
 				C18BEE482A059F520008A931 /* ChatListViewModel.swift in Sources */,
