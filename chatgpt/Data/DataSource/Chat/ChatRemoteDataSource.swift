@@ -9,7 +9,11 @@ import Foundation
 import CoreData
 
 class ChatDataSource: ChatDataSourceProtocol {
-    func getMessages() async throws -> [Message] {
+    func send(this message: String, isSentByUser: Bool, to chatID: String) async throws {
+        
+    }
+
+    func getMessages(for chatID: String) async throws -> [Message] {
         return []
     }
 
