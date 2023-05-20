@@ -61,4 +61,14 @@ struct PersistenceController {
             }
         }
     }
+    
+    func whereIsMySQLite() {
+        let path = NSPersistentContainer
+            .defaultDirectoryURL()
+            .absoluteString
+            .replacingOccurrences(of: "file://", with: "")
+            .removingPercentEncoding
+
+        print(path ?? "Not found")
+    }
 }

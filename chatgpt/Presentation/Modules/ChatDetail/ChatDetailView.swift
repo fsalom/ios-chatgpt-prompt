@@ -44,7 +44,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                               text: $viewModel.userNewMessage,
                               axis: .vertical).lineLimit(4)
                     .onSubmit {
-                        viewModel.sendNewMessage()
+                        viewModel.send(this: viewModel.userNewMessage)
                     }.padding(10)
                         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
                         .overlay(
@@ -56,11 +56,11 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
 
                     if viewModel.userNewMessage.isEmpty {
                         Button("Enviar") {
-                            viewModel.sendNewMessage()
+                            viewModel.send(this: viewModel.userNewMessage)
                         }.disabled(viewModel.userNewMessage.isEmpty)
                     } else {
                         Button {
-                            viewModel.sendNewMessage()
+                            viewModel.send(this: viewModel.userNewMessage)
                         } label: {
                             Image(systemName: "paperplane.fill").rotationEffect(Angle(degrees: 45))
                         } .frame(width: 40, height: 40)
@@ -74,6 +74,8 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                 .padding()
                 .background(Color.gray.opacity(0.2))
             }
+        }.onAppear {
+            viewModel.load()
         }
     }
 }
@@ -88,7 +90,11 @@ struct ChatDetailView_Previews: PreviewProvider {
 
         let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
         let prompt = "example"
-        ChatDetailView(viewModel: ChatDetailViewModel(with: prompt,
+        ChatDetailView(viewModel: ChatDetailViewModel(with: Chat(profileImage: Data(),
+                                                                 name: "",
+                                                                 id: "",
+                                                                 prompt: "",
+                                                                 lastUpdated: Date()),
                                                       and: useCase))
     }
 }

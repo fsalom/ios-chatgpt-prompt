@@ -10,6 +10,7 @@
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatMessage" inverseName="chat" inverseEntity="ChatMessage"/>
     </entity>
     <entity name="ChatMessage" representedClassName="ChatMessage" syncable="YES">
+        <attribute name="chatID" optional="YES" attributeType="String"/>
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
