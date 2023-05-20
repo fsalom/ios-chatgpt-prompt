@@ -28,7 +28,6 @@ class Message: Identifiable, Equatable {
     }
 
     let id = UUID()
-    var contents: [MessageContent]
     let isSentByUser: Bool
     var state: MessageState
     var role: String
@@ -37,15 +36,23 @@ class Message: Identifiable, Equatable {
     init(dto: MessageDTO) {
         role = dto.role
         content = dto.content
-        contents = []
         state = .success
         isSentByUser = false
     }
 
-    init(role: String, isSentByUser: Bool, state: MessageState, content: String){
+    init(coredata: ChatMessageCD) {
+        role = coredata.role
+        content = coredata.content
+        state = .success
+        isSentByUser = coredata.isSentByUser
+    }
+
+    init(role: String,
+         isSentByUser: Bool,
+         state: MessageState,
+         content: String){
         self.isSentByUser = isSentByUser
         self.state = state
-        self.contents = []
         self.role = role
         self.content = content
     }

@@ -17,12 +17,7 @@ struct ChatListView<VM>: View where VM: ChatListViewModelProtocol {
                 ScrollViewReader { value in
                     ForEach(viewModel.chats, id: \.id) { item in
                         NavigationLink(destination: ChatDetailBuilder().build(with: item.prompt)) {
-                            ChatListMessageView(chat: item).swipeActions(edge: .trailing) {
-                                Button("Order") {
-                                                print("Awesome!")
-                                            }
-                                            .tint(.green)
-                            }
+                            ChatListMessageView(chat: item)                   
                         }.buttonStyle(PlainButtonStyle())
                     }.onAppear {
                         viewModel.load()

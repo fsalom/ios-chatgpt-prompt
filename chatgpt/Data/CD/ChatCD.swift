@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-
 import CoreData
 
 @objc(Chat)
@@ -21,19 +19,5 @@ public class ChatCD: NSManagedObject, Identifiable {
     @NSManaged public var name: String
     @NSManaged public var prompt: String
     @NSManaged public var lastUpdated: Date
-
-    // Other functions and stuff
+    @NSManaged public var messages: [ChatMessageCD]
 }
-
-
-/*
-struct Chat: Identifiable {
-    let id = UUID()
-    let name: String
-    let online: Bool
-    let profileImage: String
-    let lastUpdated: String
-    let lastMessage: String
-}
- */
-

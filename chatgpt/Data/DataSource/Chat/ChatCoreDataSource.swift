@@ -42,11 +42,6 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         }
         chat.prompt = prompt
         chat.lastUpdated = Date()
-        do {
-            try context.save()
-            print("successfully saved")
-        } catch {
-            print("Could not save")
-        }
+        try context.save()
     }
 }
