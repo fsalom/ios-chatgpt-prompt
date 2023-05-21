@@ -20,6 +20,7 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
         self.messages.append(Message(role: "user",
                                      isSentByUser: true,
                                      state: .success,
+                                     createdAt: chat.lastUpdated,
                                      content: chat.prompt))        
     }
 
@@ -50,7 +51,12 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                     messages.append(gptmessage)
                 }
             } catch {
-
+                messages.removeAll(where: { $0.id == newMessage.id })
+                let errorMessage = Message(role: "assistant",
+                                      isSentByUser: false,
+                                      state: .error,
+                                      content: "")
+                messages.append(errorMessage)
             }
         }
         userNewMessage = ""

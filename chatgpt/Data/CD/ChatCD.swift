@@ -26,6 +26,6 @@ public class ChatCD: NSManagedObject, Identifiable {
     @NSManaged public var name: String
     @NSManaged public var prompt: String
     @NSManaged public var lastUpdated: Date
-    @NSManaged public var messages: NSSet
+    @NSManaged public var messages: NSSet?
 
 }

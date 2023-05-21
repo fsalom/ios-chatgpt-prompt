@@ -39,7 +39,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     }
                 }
 
-                HStack(alignment: .bottom) {
+                HStack(alignment: viewModel.userNewMessage.isEmpty ? .center : .bottom) {
                     TextField("Escribe aquí...",
                               text: $viewModel.userNewMessage,
                               axis: .vertical).lineLimit(4)

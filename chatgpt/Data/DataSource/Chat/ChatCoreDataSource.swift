@@ -20,13 +20,17 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest(for: chatID)
         let chatsCD = try context.fetch(request)
         guard let chat = chatsCD.first else { return [] }
+        if let chatMessages = chat.messages {
+            let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+            let sortedMessages = chatMessages.sortedArray(using: [sortDescriptor]) as! [ChatMessageCD]
 
-        let messageArray = Array(chat.messages)
-        var messages: [Message] = []
-        for message in messageArray {
-            messages.append(Message(coredata: message as! ChatMessageCD))
+            var messages: [Message] = []
+            for message in sortedMessages {
+                messages.append(Message(coredata: message))
+            }
+            return messages
         }
-        return messages
+        return []
     }
 
     func getChats() async throws -> [Chat] {

@@ -13,7 +13,7 @@ struct ChatMessageView: View {
         HStack(alignment: .top) {
             if messageItem.isSentByUser {
                 Spacer()
-                Text("10:00")
+                Text(messageItem.createdAt.formatTime())
                     .font(.system(size: 10))
                     .foregroundColor(.gray)
             }
@@ -21,7 +21,7 @@ struct ChatMessageView: View {
             Text(messageItem.content ?? "").setStyle(isUser: messageItem.isSentByUser)
 
             if !messageItem.isSentByUser {
-                Text("12:00")
+                Text(messageItem.createdAt.formatTime())
                     .font(.system(size: 10))
                     .foregroundColor(.gray)
                 Spacer()
@@ -66,5 +66,13 @@ fileprivate extension Text {
                     .fill(Color.blue)
             )
             .cornerRadius(15, corners: [.bottomRight, .topLeft, .topRight])
+    }
+}
+
+fileprivate extension Date {
+    func formatTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self)
     }
 }

@@ -31,6 +31,7 @@ class Message: Identifiable, Equatable {
     let isSentByUser: Bool
     var state: MessageState
     var role: String
+    var createdAt: Date = Date()
     var content: String? = ""
 
     init(dto: MessageDTO) {
@@ -44,12 +45,14 @@ class Message: Identifiable, Equatable {
         role = coredata.role
         content = coredata.content
         state = .success
+        createdAt = coredata.createdAt
         isSentByUser = coredata.isSentByUser
     }
 
     init(role: String,
          isSentByUser: Bool,
          state: MessageState,
+         createdAt: Date = Date(),
          content: String){
         self.isSentByUser = isSentByUser
         self.state = state
