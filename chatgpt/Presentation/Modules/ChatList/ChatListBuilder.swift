@@ -13,10 +13,7 @@ class ChatListBuilder {
         let datasource = ChatCoreDataSource(context: PersistenceController.shared.container.viewContext)
         let repository = ChatRepository(datasource: datasource)
 
-        let GPTdatasource = GPTDataSource(network: Network(baseURL: "https://api.openai.com/v1/chat/"))
-        let GPTrepository = GPTRepository(datasource: GPTdatasource)
-
-        let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
+        let useCase = ChatUseCase(chatRepository: repository)
         
         let viewModel = ChatListViewModel(useCase: useCase)
         let view = ChatListView(viewModel: viewModel)

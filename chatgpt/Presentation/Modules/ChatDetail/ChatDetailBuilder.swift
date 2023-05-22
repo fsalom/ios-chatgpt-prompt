@@ -13,7 +13,7 @@ class ChatDetailBuilder {
         let datasource = ChatCoreDataSource(context: PersistenceController.shared.container.viewContext)
         let repository = ChatRepository(datasource: datasource)
 
-        let GPTdatasource = GPTDataSource(network: Network(baseURL: "https://api.openai.com/v1/chat/"))
+        let GPTdatasource = GPTDataSource(network: Network(baseURL: "https://api.openai.com/v1/chat/", format: .short))
         let GPTrepository = GPTRepository(datasource: GPTdatasource)
 
         let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
