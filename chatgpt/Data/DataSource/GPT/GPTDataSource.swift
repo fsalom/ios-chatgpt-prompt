@@ -14,6 +14,12 @@ protocol GPTDataSourceProtocol {
 
 
 class GPTDataSource: GPTDataSourceProtocol {
+    var network: Network
+
+    init(network: Network) {
+        self.network = network
+    }
+
     enum ChatError: Error {
         case invalidURL
         case fail
@@ -26,12 +32,12 @@ class GPTDataSource: GPTDataSourceProtocol {
             "Content-Type": "application/json",
             "Authorization": "Bearer \(openaiAPIKey)"
         ]
-        let endpoint = Endpoint(path: "https://api.openai.com/v1/chat/completions",
+        let endpoint = Endpoint(path: "completions",
                                 httpMethod: .post,
                                 body: try? JSONEncoder().encode(parameters),
                                 headers: headers)
-        let response = try await Network(baseURL: "").load(endpoint: endpoint,
-                                                of: ResponseDTO.self)
+        let response = try await self.network.load(endpoint: endpoint,
+                                                   of: ResponseDTO.self)
         return response.choices.first?.message
     }
 }

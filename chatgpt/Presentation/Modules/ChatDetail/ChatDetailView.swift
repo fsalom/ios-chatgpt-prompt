@@ -82,20 +82,11 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
 
 struct ChatDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let datasource = ChatDataSource()
-        let repository = ChatRepository(datasource: datasource)
-
-        let GPTdatasource = GPTDataSource()
-        let GPTrepository = GPTRepository(datasource: GPTdatasource)
-
-        let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
-        let prompt = "example"
-        ChatDetailView(viewModel: ChatDetailViewModel(with: Chat(profileImage: Data(),
-                                                                 name: "",
-                                                                 id: "",
-                                                                 prompt: "",
-                                                                 updatedAt: Date(),
-                                                                createdAt: Date()),
-                                                      and: useCase))
+        ChatDetailBuilder().build(with: Chat(profileImage: Data(),
+                                             name: "",
+                                             id: "",
+                                             prompt: "",
+                                             updatedAt: Date(),
+                                            createdAt: Date()))
     }
 }
