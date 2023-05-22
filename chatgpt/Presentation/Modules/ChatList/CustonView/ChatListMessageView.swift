@@ -45,7 +45,7 @@ struct ChatListMessageView: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text(chat.lastUpdated.formatted(.relative(presentation: .named))).font(.footnote)
+                Text(chat.createdAt.formatted(.relative(presentation: .named))).font(.footnote)
             }
 
         }.frame(maxWidth: .infinity)
@@ -62,6 +62,7 @@ struct ChatMessageView_Previews: PreviewProvider {
                                        name: "",
                                        id: "",
                                        prompt: "",
-                                       lastUpdated: Date()))
+                                       updatedAt: Date(),
+                                       createdAt: Date()))
     }
 }

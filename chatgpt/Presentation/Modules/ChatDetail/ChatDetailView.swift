@@ -94,7 +94,8 @@ struct ChatDetailView_Previews: PreviewProvider {
                                                                  name: "",
                                                                  id: "",
                                                                  prompt: "",
-                                                                 lastUpdated: Date()),
+                                                                 updatedAt: Date(),
+                                                                createdAt: Date()),
                                                       and: useCase))
     }
 }

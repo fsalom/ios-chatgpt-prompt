@@ -13,21 +13,24 @@ struct Chat: Identifiable {
     var id: String
     var name: String
     var prompt: String
-    var lastUpdated: Date
+    var updatedAt: Date
+    var createdAt: Date
 
     init(with coredata: ChatCD) {
         self.profileImage = coredata.profileImage
         self.id = coredata.id
         self.name = coredata.name
         self.prompt = coredata.prompt
-        self.lastUpdated = coredata.lastUpdated
+        self.updatedAt = coredata.updatedAt
+        self.createdAt = coredata.createdAt
     }
 
-    init(profileImage: Data, name: String, id: String, prompt: String, lastUpdated: Date) {
+    init(profileImage: Data, name: String, id: String, prompt: String, updatedAt: Date, createdAt: Date) {
         self.profileImage = profileImage
         self.id = id
         self.name = name
         self.prompt = prompt
-        self.lastUpdated = lastUpdated
+        self.updatedAt = updatedAt
+        self.createdAt = createdAt
     }
 }

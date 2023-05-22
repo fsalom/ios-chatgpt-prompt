@@ -9,7 +9,7 @@ import Foundation
 
 class ChatDetailViewModel: ChatDetailViewModelProtocol {
     @Published var userNewMessage =  ""
-    @Published var messages: [Message] = []
+    @Published var messages: [Message]
 
     var useCase: ChatUseCaseProtocol!
     var chat: Chat
@@ -17,17 +17,20 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
     init(with chat: Chat, and useCase: ChatUseCaseProtocol) {
         self.useCase = useCase
         self.chat = chat
+        self.messages = []
         self.messages.append(Message(role: "user",
                                      isSentByUser: true,
                                      state: .success,
-                                     createdAt: chat.lastUpdated,
-                                     content: chat.prompt))        
+                                     createdAt: chat.createdAt,
+                                     content: chat.prompt))
     }
 
     func load() {
         Task {
             let messages = try await useCase.getMessages(for: chat.id)
-            self.messages.append(contentsOf: messages)
+            await MainActor.run {
+                self.messages.append(contentsOf: messages)
+            }
         }
     }
 
@@ -37,9 +40,9 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                                      state: .success,
                                      content: message))
         let newMessage = Message(role: "assistant",
-                              isSentByUser: false,
-                              state: .loading,
-                              content: "")
+                                 isSentByUser: false,
+                                 state: .loading,
+                                 content: "")
         messages.append(newMessage)
         Task {
             do {
@@ -47,16 +50,18 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                                                              with: messages,
                                                              for: chat.id)
                 await MainActor.run {
-                    messages.removeAll(where: { $0.id == newMessage.id })                    
+                    messages.removeAll(where: { $0.id == newMessage.id })
                     messages.append(gptmessage)
                 }
             } catch {
-                messages.removeAll(where: { $0.id == newMessage.id })
-                let errorMessage = Message(role: "assistant",
-                                      isSentByUser: false,
-                                      state: .error,
-                                      content: "")
-                messages.append(errorMessage)
+                await MainActor.run {
+                    messages.removeAll(where: { $0.id == newMessage.id })
+                    let errorMessage = Message(role: "assistant",
+                                               isSentByUser: false,
+                                               state: .error,
+                                               content: "")
+                    messages.append(errorMessage)
+                }
             }
         }
         userNewMessage = ""

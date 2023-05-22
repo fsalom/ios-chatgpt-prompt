@@ -11,8 +11,8 @@ struct ChatMessageErrorView: View {
     var body: some View {
         HStack(alignment: .top) {
             Text("Error").error()
-        }.frame(minWidth: 120, maxWidth: UIScreen.main.bounds.width - 60)
-            .padding(10)
+        }.padding(10)
+        Spacer()
     }
 }
 

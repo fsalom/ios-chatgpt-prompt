@@ -35,7 +35,7 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
 
     func getChats() async throws -> [Chat] {
         let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest()
-        let sort = NSSortDescriptor(key: "lastUpdated", ascending: false)
+        let sort = NSSortDescriptor(key: "updatedAt", ascending: false)
         request.returnsObjectsAsFaults = false
         request.sortDescriptors = [sort]
         let chatsCD = try context.fetch(request)
@@ -54,17 +54,19 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
             chat.profileImage = image
         }
         chat.prompt = prompt
-        chat.lastUpdated = Date()
+        chat.createdAt = Date()
+        chat.updatedAt = Date()
         try context.save()
     }
 
     func send(this message: String, isSentByUser: Bool, to chatID: String) async throws {
-        PersistenceController.shared.whereIsMySQLite()
+        // PersistenceController.shared.whereIsMySQLite()
         let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest()
         let chatsCD = try context.fetch(request)
         guard let chat = chatsCD.first else { return }
         let chatMessage = ChatMessageCD(context: context)
         chatMessage.id = UUID().uuidString
+        chatMessage.role = isSentByUser ? "user" : "assistant"
         chatMessage.content = message
         chatMessage.chatID = chatID
         chatMessage.createdAt = Date()
