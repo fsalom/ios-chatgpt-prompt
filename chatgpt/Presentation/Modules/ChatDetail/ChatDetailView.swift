@@ -32,10 +32,10 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         }
                         .padding(.bottom, 60)
                     }.onAppear {
-                        value.scrollTo(viewModel.messages.last?.id)
+                        value.scrollTo(viewModel.messages.last?.id, anchor: .bottom)
                     }
                     .onChange(of: viewModel.messages.count) { _ in
-                        value.scrollTo(viewModel.messages.last?.id)
+                        value.scrollTo(viewModel.messages.last?.id, anchor: .bottom)
                     }
                 }
 

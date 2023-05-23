@@ -11,11 +11,7 @@ import Lottie
 struct ChatMessageLoadingView: View {
     var body: some View {
         HStack(alignment: .top) {
-            LottieView(lottieFile: "simple-loading").frame(width: 200, height: 60)
-
-            Text("12:00")
-                .font(.system(size: 10))
-                .foregroundColor(.gray)
+            LottieView(lottieFile: "simple-loading").frame(width: 200, height: 60)            
             Spacer()
 
         }.frame(minWidth: 120, maxWidth: UIScreen.main.bounds.width - 60)

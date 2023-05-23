@@ -71,6 +71,7 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         chatMessage.chatID = chatID
         chatMessage.createdAt = Date()
         chatMessage.isSentByUser = isSentByUser
+        chat.updatedAt = Date()
         let mutableMessages = chat.mutableSetValue(forKey: "messages")
         mutableMessages.add(chatMessage)
         try context.save()

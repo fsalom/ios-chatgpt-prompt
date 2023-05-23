@@ -45,7 +45,7 @@ struct ChatListMessageView: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text(chat.createdAt.formatted(.relative(presentation: .named))).font(.footnote)
+                Text(chat.updatedAt.formatted(.relative(presentation: .named))).font(.footnote)
             }
 
         }.frame(maxWidth: .infinity)
