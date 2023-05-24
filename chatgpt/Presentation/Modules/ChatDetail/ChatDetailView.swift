@@ -10,6 +10,7 @@ import Foundation
 
 struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     @ObservedObject var viewModel: VM
+    @State private var scrollToBottom: Bool = false
 
     var body: some View {
         ZStack {
@@ -31,11 +32,21 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                             }
                         }
                         .padding(.bottom, 60)
-                    }.onAppear {
-                        value.scrollTo(viewModel.messages.last?.id, anchor: .bottom)
+                        .onChange(of: viewModel.messages.count) { _ in
+                            scrollToBottom = true
+                        }
                     }
-                    .onChange(of: viewModel.messages.count) { _ in
-                        value.scrollTo(viewModel.messages.last?.id, anchor: .bottom)
+                    .onAppear {
+                        scrollToBottom = true
+                    }
+                    .onChange(of: scrollToBottom) { shouldScroll in
+                        if shouldScroll {
+                            withAnimation {
+                                guard let lastMessage = viewModel.messages.last else { return }
+                                value.scrollTo(lastMessage.id, anchor: .bottom)
+                            }
+                            scrollToBottom = false
+                        }
                     }
                 }
 
@@ -43,9 +54,9 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     TextField("Escribe aquí...",
                               text: $viewModel.userNewMessage,
                               axis: .vertical).lineLimit(4)
-                    .onSubmit {
-                        viewModel.send(this: viewModel.userNewMessage)
-                    }.padding(10)
+                        .onSubmit {
+                            viewModel.send(this: viewModel.userNewMessage)
+                        }.padding(10)
                         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
@@ -87,6 +98,6 @@ struct ChatDetailView_Previews: PreviewProvider {
                                              id: "",
                                              prompt: "",
                                              updatedAt: Date(),
-                                            createdAt: Date()))
+                                             createdAt: Date()))
     }
 }
