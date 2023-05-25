@@ -11,6 +11,7 @@ import Foundation
 struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     @ObservedObject var viewModel: VM
     @State private var scrollToBottom: Bool = false
+    @State private var presentImporter = false
 
     var body: some View {
         ZStack {
@@ -24,7 +25,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                                 case .success:
                                     ChatMessageView(messageItem: message).id(message.id)
                                 case .error:
-                                    ChatMessageErrorView().id(message.id)
+                                    ChatMessageErrorView(messageItem: message).id(message.id)
                                 case .loading:
                                     ChatMessageLoadingView()
                                 }
@@ -51,6 +52,27 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                 }
 
                 HStack(alignment: viewModel.userNewMessage.isEmpty ? .center : .bottom) {
+                    if viewModel.userNewMessage.isEmpty {
+                        Button {
+                            presentImporter = true
+                        } label: {
+                            Image(systemName: "plus")
+                        }.fileImporter(isPresented: $presentImporter, allowedContentTypes: [.text]) { result in
+                            switch result {
+                            case .success(let url):
+                                print(url)
+                                do {
+                                    let text = try String(contentsOf: url)
+                                    viewModel.send(this: text)                                    
+                                } catch {
+
+                                }
+
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
                     TextField("Escribe aquí...",
                               text: $viewModel.userNewMessage,
                               axis: .vertical).lineLimit(4)
@@ -84,6 +106,12 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                 }
                 .padding()
                 .background(Color.gray.opacity(0.2))
+            }
+            if viewModel.isFlushRequired {
+                Button("Limpiar chat") {
+
+                }.frame(width: 300, height: 44, alignment: .center)
+                    .background(.red)
             }
         }.onAppear {
             viewModel.load()
