@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ChatMessageErrorView: View {
+    var messageItem: Message
     var body: some View {
         HStack(alignment: .top) {
-            Text("Error").error()
+            Text("Error: \(messageItem.content ?? "")").error()
         }.padding(10)
         Spacer()
     }
@@ -18,7 +19,7 @@ struct ChatMessageErrorView: View {
 
 struct ChatMessageErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatMessageErrorView()
+        ChatMessageErrorView(messageItem: Message(role: "", isSentByUser: true, state: .error, content: ""))
     }
 }
 

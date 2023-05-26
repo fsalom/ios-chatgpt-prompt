@@ -27,7 +27,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                                 case .error:
                                     ChatMessageErrorView(messageItem: message).id(message.id)
                                 case .loading:
-                                    ChatMessageLoadingView()
+                                    ChatMessageLoadingView().id(message.id)
                                 }
                                 if !message.isSentByUser { Spacer() }
                             }
@@ -50,7 +50,13 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         }
                     }
                 }
+                if viewModel.isFlushRequired {
+                    Button("Limpiar chat") {
 
+                    }.frame(maxWidth: .infinity, maxHeight: 44, alignment: .center)
+                        .background(.red)
+                        .foregroundColor(.white)
+                }
                 HStack(alignment: viewModel.userNewMessage.isEmpty ? .center : .bottom) {
                     if viewModel.userNewMessage.isEmpty {
                         Button {
@@ -107,12 +113,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                 .padding()
                 .background(Color.gray.opacity(0.2))
             }
-            if viewModel.isFlushRequired {
-                Button("Limpiar chat") {
 
-                }.frame(width: 300, height: 44, alignment: .center)
-                    .background(.red)
-            }
         }.onAppear {
             viewModel.load()
         }

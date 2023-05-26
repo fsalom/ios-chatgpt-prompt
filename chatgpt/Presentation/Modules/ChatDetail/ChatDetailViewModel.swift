@@ -9,6 +9,7 @@ import Foundation
 
 class ChatDetailViewModel: ChatDetailViewModelProtocol {
     @Published var userNewMessage =  ""
+    @Published var isFlushRequired = false
     @Published var messages: [Message]
 
     var useCase: ChatUseCaseProtocol!
@@ -56,11 +57,19 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
             } catch {
                 await MainActor.run {
                     messages.removeAll(where: { $0.id == newMessage.id })
-                    let errorMessage = Message(role: "assistant",
-                                               isSentByUser: false,
-                                               state: .error,
-                                               content: "")
-                    messages.append(errorMessage)
+                    guard let GPTError = error as? GPTError else { return }
+                    switch GPTError {
+                    case .custom(let string, let code):
+                        let errorMessage = Message(role: "assistant",
+                                                   isSentByUser: false,
+                                                   state: .error,
+                                                   content: string)
+                        if code == "context_length_exceeded" {
+                            isFlushRequired = true
+                        }
+                        messages.append(errorMessage)
+                    }
+
                 }
             }
         }

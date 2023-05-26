@@ -10,6 +10,7 @@ import Foundation
 protocol ChatDetailViewModelProtocol: ObservableObject {
     var userNewMessage: String { get set }
     var messages: [Message] { get set }
+    var isFlushRequired: Bool { get set }
     func send(this message: String)
     func load()
 }
