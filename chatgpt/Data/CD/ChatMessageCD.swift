@@ -19,4 +19,5 @@ public class ChatMessageCD: NSManagedObject, Identifiable {
     @NSManaged public var createdAt: Date
     @NSManaged public var isSentByUser: Bool
     @NSManaged public var chatID: String
+    @NSManaged public var isFile: Bool
 }

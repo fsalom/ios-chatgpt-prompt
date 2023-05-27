@@ -49,6 +49,7 @@ class Message: Identifiable, Equatable {
         state = .success
         createdAt = coredata.createdAt
         isSentByUser = coredata.isSentByUser
+        isFile = coredata.isFile
         state = isFile(this: coredata.content) ? .file : self.state
     }
 
@@ -56,12 +57,14 @@ class Message: Identifiable, Equatable {
          isSentByUser: Bool,
          state: MessageState,
          createdAt: Date = Date(),
-         content: String){
+         content: String,
+         isFile: Bool = false){
         self.isSentByUser = isSentByUser
         self.state = state
         self.role = role
         self.content = content
-        self.state = isFile(this: content) ? .file : self.state
+        self.state = isFile ? .file : self.state
+        self.isFile = isFile
     }
 
     func isFile(this text: String) -> Bool {

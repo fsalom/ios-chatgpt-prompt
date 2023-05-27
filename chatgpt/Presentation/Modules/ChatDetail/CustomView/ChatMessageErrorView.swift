@@ -19,7 +19,7 @@ struct ChatMessageErrorView: View {
 
 struct ChatMessageErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatMessageErrorView(messageItem: Message(role: "", isSentByUser: true, state: .error, content: ""))
+        ChatMessageErrorView(messageItem: Message(role: "", isSentByUser: true, state: .error, content: "", isFile: false))
     }
 }
 

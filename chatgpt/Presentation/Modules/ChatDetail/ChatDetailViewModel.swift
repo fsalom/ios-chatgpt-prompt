@@ -23,7 +23,8 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                                      isSentByUser: true,
                                      state: .success,
                                      createdAt: chat.createdAt,
-                                     content: chat.prompt))
+                                     content: chat.prompt,
+                                     isFile: false))
     }
 
     func clean() {
@@ -44,35 +45,29 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
         }
     }
 
-    func send(this message: String) {
-        self.messages.append(Message(role: "user",
-                                     isSentByUser: true,
-                                     state: .success,
-                                     content: message))
-        let newMessage = Message(role: "assistant",
-                                 isSentByUser: false,
-                                 state: .loading,
-                                 content: "")
-        messages.append(newMessage)
+    func send(this message: String, isFile: Bool) {
+        let loadingMessage = getLoadingAndSetMessageForUser(with: message,
+                                                            and: isFile)
         Task {
             do {
                 let gptmessage = try await useCase.sendToGPT(this: message,
                                                              with: messages,
                                                              for: chat.id)
                 await MainActor.run {
-                    messages.removeAll(where: { $0.id == newMessage.id })
+                    messages.removeAll(where: { $0.id == loadingMessage.id })
                     messages.append(gptmessage)
                 }
             } catch {
                 await MainActor.run {
-                    messages.removeAll(where: { $0.id == newMessage.id })
+                    messages.removeAll(where: { $0.id == loadingMessage.id })
                     guard let GPTError = error as? GPTError else { return }
                     switch GPTError {
                     case .custom(let string, let code):
                         let errorMessage = Message(role: "assistant",
                                                    isSentByUser: false,
                                                    state: .error,
-                                                   content: string)
+                                                   content: string,
+                                                   isFile: false)
                         if code == "context_length_exceeded" {
                             isFlushRequired = true
                         }
@@ -83,5 +78,20 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
             }
         }
         userNewMessage = ""
+    }
+
+    func getLoadingAndSetMessageForUser(with message: String, and isFile: Bool) -> Message {
+        self.messages.append(Message(role: "user",
+                                     isSentByUser: true,
+                                     state: .success,
+                                     content: message,
+                                     isFile: isFile))
+        let newMessage = Message(role: "assistant",
+                                 isSentByUser: false,
+                                 state: .loading,
+                                 content: "",
+                                 isFile: false)
+        messages.append(newMessage)
+        return newMessage
     }
 }

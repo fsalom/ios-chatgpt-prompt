@@ -51,7 +51,11 @@ class ChatUseCase: ChatUseCaseProtocol {
                                           to: chatID)
             return Message(dto: message)
         }
-        return Message(role: "assistant", isSentByUser: false, state: .error, content: "Error")
+        return Message(role: "assistant",
+                       isSentByUser: false,
+                       state: .error,
+                       content: "Error",
+                       isFile: false)
     }
 
     func create(with name: String, image: Data?, prompt: String) async throws {
