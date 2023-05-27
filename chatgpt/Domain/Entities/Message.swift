@@ -11,6 +11,7 @@ enum MessageState {
     case loading
     case error
     case success
+    case file
 }
 
 struct MessageContent {
@@ -33,6 +34,7 @@ class Message: Identifiable, Equatable {
     var role: String
     var createdAt: Date = Date()
     var content: String? = ""
+    var isFile: Bool = false
 
     init(dto: MessageDTO) {
         role = dto.role
@@ -47,6 +49,7 @@ class Message: Identifiable, Equatable {
         state = .success
         createdAt = coredata.createdAt
         isSentByUser = coredata.isSentByUser
+        state = isFile(this: coredata.content) ? .file : self.state
     }
 
     init(role: String,
@@ -58,5 +61,16 @@ class Message: Identifiable, Equatable {
         self.state = state
         self.role = role
         self.content = content
+        self.state = isFile(this: content) ? .file : self.state
+    }
+
+    func isFile(this text: String) -> Bool {
+        let characters: [Character] = [",", ";"]
+        for character in characters {
+            if text.filter({ $0 == character }).count > 6 {
+                return true
+            }
+        }
+        return false
     }
 }

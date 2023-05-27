@@ -12,5 +12,6 @@ protocol ChatDetailViewModelProtocol: ObservableObject {
     var messages: [Message] { get set }
     var isFlushRequired: Bool { get set }
     func send(this message: String)
+    func clean()
     func load()
 }

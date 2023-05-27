@@ -25,4 +25,8 @@ class ChatDataSource: ChatDataSourceProtocol {
     func getChats() async throws -> [Chat] {
         return []
     }
+
+    func clean(this chat: Chat) {
+        
+    }
 }

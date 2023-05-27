@@ -12,6 +12,7 @@ protocol ChatRepositoryProtocol {
     func getChats() async throws -> [Chat]
     func create(with name: String, image: Data?, prompt: String) async throws
     func send(this message: String, isSentByUser: Bool, to chatID: String) async throws
+    func clean(this chat: Chat) throws
 }
 
 class ChatRepository: ChatRepositoryProtocol {
@@ -35,5 +36,8 @@ class ChatRepository: ChatRepositoryProtocol {
 
     func send(this message: String, isSentByUser: Bool, to chatID: String) async throws {
         try await datasource.send(this: message, isSentByUser: isSentByUser, to: chatID)
+    }
+    func clean(this chat: Chat) throws {
+        try datasource.clean(this: chat)
     }
 }

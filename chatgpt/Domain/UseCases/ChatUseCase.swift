@@ -15,6 +15,7 @@ protocol ChatUseCaseProtocol {
                    with context: [Message],
                    for chatID: String) async throws -> Message
     func create(with name: String, image: Data?, prompt: String) async throws
+    func clean(this chat: Chat) throws
 }
 
 class ChatUseCase: ChatUseCaseProtocol {
@@ -55,5 +56,9 @@ class ChatUseCase: ChatUseCaseProtocol {
 
     func create(with name: String, image: Data?, prompt: String) async throws {
         try await chatRepository.create(with: name, image: image, prompt: prompt)
+    }
+
+    func clean(this chat: Chat) throws {
+        try chatRepository.clean(this: chat)
     }
 }

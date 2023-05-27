@@ -11,7 +11,7 @@ import Foundation
 struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     @ObservedObject var viewModel: VM
     @State private var scrollToBottom: Bool = false
-    @State private var presentImporter = false
+    @State private var presentImporter: Bool = false
 
     var body: some View {
         ZStack {
@@ -28,6 +28,8 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                                     ChatMessageErrorView(messageItem: message).id(message.id)
                                 case .loading:
                                     ChatMessageLoadingView().id(message.id)
+                                case .file:
+                                    ChatMessageFileView(messageItem: message).id(message.id)
                                 }
                                 if !message.isSentByUser { Spacer() }
                             }
@@ -52,7 +54,8 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                 }
                 if viewModel.isFlushRequired {
                     Button("Limpiar chat") {
-
+                        viewModel.clean()
+                        viewModel.isFlushRequired = false
                     }.frame(maxWidth: .infinity, maxHeight: 44, alignment: .center)
                         .background(.red)
                         .foregroundColor(.white)
@@ -69,7 +72,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                                 print(url)
                                 do {
                                     let text = try String(contentsOf: url)
-                                    viewModel.send(this: text)                                    
+                                    viewModel.send(this: text)
                                 } catch {
 
                                 }

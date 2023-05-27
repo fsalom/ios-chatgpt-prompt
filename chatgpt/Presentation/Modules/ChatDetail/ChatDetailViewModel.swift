@@ -26,6 +26,15 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                                      content: chat.prompt))
     }
 
+    func clean() {
+        Task {
+            try? useCase.clean(this: chat)
+            await MainActor.run {
+                self.messages = []
+            }
+        }
+    }
+
     func load() {
         Task {
             let messages = try await useCase.getMessages(for: chat.id)

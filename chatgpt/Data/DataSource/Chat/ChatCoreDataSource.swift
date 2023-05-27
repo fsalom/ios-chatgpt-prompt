@@ -76,4 +76,15 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         mutableMessages.add(chatMessage)
         try context.save()
     }
+
+    func clean(this chat: Chat) throws {
+        let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest(for: chat.id)
+        let chatsCD = try context.fetch(request)
+        guard let chat = chatsCD.first else { return }
+        guard let messages = chat.messages else { return }
+        for message in messages {
+            try context.delete(message as! NSManagedObject)
+        }
+        try context.save()
+    }
 }
