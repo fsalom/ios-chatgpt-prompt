@@ -46,21 +46,23 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
     }
 
     func send(this message: String) {
-        let loadingMessage = getLoadingAndSetMessageForUser(with: message,
-                                                            isFile: false)
+        let (loadingMessage, message) = getLoadingAndSetMessageForUser(with: message,
+                                                                       isFile: false)
         setAndCall(with: message, for: loadingMessage.id)
         userNewMessage = ""
     }
 
     func send(this file: URL) {
         guard let text = try? String(contentsOf: file) else { return }
-        let loadingMessage = getLoadingAndSetMessageForUser(with: text,
-                                                            isFile: true)
-        setAndCall(with: text, for: loadingMessage.id)
+        let filename = file.pathComponents.last
+        let (loadingMessage, message) = getLoadingAndSetMessageForUser(with: text,
+                                                                       and: filename,
+                                                                       isFile: true)
+        setAndCall(with: message, for: loadingMessage.id)
         userNewMessage = ""
     }
 
-    func setAndCall(with message: String, for id: UUID) {
+    func setAndCall(with message: Message, for id: UUID) {
         Task {
             do {
                 let gptmessage = try await useCase.sendToGPT(this: message,
@@ -75,28 +77,28 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                 switch GPTError {
                 case .custom(let error, let code):
                     let errorMessage = Message(error: error)
-                    if code == "context_length_exceeded" {
-                        isFlushRequired = true
-                    }
-                    await replace(this: id, with: errorMessage)
+                    await replace(this: id, with: errorMessage, and: code)
                 }
             }
         }
     }
 
-    func getLoadingAndSetMessageForUser(with message: String, isFile: Bool) -> Message {
-        self.messages.append(Message(role: "user",
-                                     isSentByUser: true,
-                                     state: .success,
-                                     content: message,
-                                     isFile: isFile))
+    func getLoadingAndSetMessageForUser(with message: String, and filename: String? = "", isFile: Bool) -> (Message, Message) {
+        let newMessage = Message(role: "user",
+                                 isSentByUser: true,
+                                 state: .success,
+                                 content: message,
+                                 filename: filename,
+                                 isFile: isFile)
         let loadingMessage = Message()
-        messages.append(loadingMessage)
-        return loadingMessage
+        self.messages.append(newMessage)
+        self.messages.append(loadingMessage)
+        return (loadingMessage, newMessage)
     }
 
-    func replace(this id: UUID, with message: Message) async {
+    func replace(this id: UUID, with message: Message, and code: String? = "") async {
         await MainActor.run {
+            isFlushRequired = code == "context_length_exceeded" ? true : false
             messages.removeAll(where: { $0.id == id })
             messages.append(message)
         }

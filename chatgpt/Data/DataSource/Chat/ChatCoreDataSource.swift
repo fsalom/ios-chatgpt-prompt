@@ -59,18 +59,20 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         try context.save()
     }
 
-    func send(this message: String, isSentByUser: Bool, to chatID: String) async throws {
+    func send(this message: Message, to chatID: String) async throws {
         // PersistenceController.shared.whereIsMySQLite()
         let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest()
         let chatsCD = try context.fetch(request)
         guard let chat = chatsCD.first else { return }
         let chatMessage = ChatMessageCD(context: context)
         chatMessage.id = UUID().uuidString
-        chatMessage.role = isSentByUser ? "user" : "assistant"
-        chatMessage.content = message
+        chatMessage.role = message.isSentByUser ? "user" : "assistant"
+        chatMessage.content = message.content ?? ""
         chatMessage.chatID = chatID
+        chatMessage.filename = message.filename ?? ""
+        chatMessage.isFile = message.isFile
         chatMessage.createdAt = Date()
-        chatMessage.isSentByUser = isSentByUser
+        chatMessage.isSentByUser = message.isSentByUser
         chat.updatedAt = Date()
         let mutableMessages = chat.mutableSetValue(forKey: "messages")
         mutableMessages.add(chatMessage)

@@ -34,6 +34,7 @@ class Message: Identifiable, Equatable {
     var role: String
     var createdAt: Date = Date()
     var content: String? = ""
+    var filename: String? = ""
     var isFile: Bool = false
 
     init(dto: MessageDTO) {
@@ -50,6 +51,7 @@ class Message: Identifiable, Equatable {
         createdAt = coredata.createdAt
         isSentByUser = coredata.isSentByUser
         isFile = coredata.isFile
+        filename = coredata.filename
         state = isFile ? .file : self.state
     }
 
@@ -58,11 +60,13 @@ class Message: Identifiable, Equatable {
          state: MessageState,
          createdAt: Date = Date(),
          content: String,
+         filename: String? = "",
          isFile: Bool = false){
         self.isSentByUser = isSentByUser
         self.state = state
         self.role = role
         self.content = content
+        self.filename = filename
         self.state = isFile ? .file : self.state
         self.isFile = isFile
     }

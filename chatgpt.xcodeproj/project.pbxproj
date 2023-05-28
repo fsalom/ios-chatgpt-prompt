@@ -264,6 +264,13 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		C1821AF32A23D1A300539D30 /* ChatPreviewer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatPreviewer;
+			sourceTree = "<group>";
+		};
 		C18BEE002A0587820008A931 = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +391,7 @@
 		C18BEE422A0588740008A931 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C1821AF32A23D1A300539D30 /* ChatPreviewer */,
 				C1542D9E2A0FED5900E2EFAD /* ChatNew */,
 				C18BEE542A065FE80008A931 /* ChatDetail */,
 				C18BEE462A059F3C0008A931 /* Menu */,

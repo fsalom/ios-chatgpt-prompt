@@ -11,7 +11,7 @@ import Foundation
 protocol ChatUseCaseProtocol {
     func getMessages(for chatID: String) async throws -> [Message]
     func getChats() async throws -> [Chat]
-    func sendToGPT(this message: String,
+    func sendToGPT(this message: Message,
                    with context: [Message],
                    for chatID: String) async throws -> Message
     func create(with name: String, image: Data?, prompt: String) async throws
@@ -35,27 +35,22 @@ class ChatUseCase: ChatUseCaseProtocol {
         try await chatRepository.getChats()
     }
 
-    func sendToGPT(this message: String,
+    func sendToGPT(this message: Message,
                    with context: [Message],
                    for chatID: String) async throws -> Message {
         let messages = context.map { message in
             MessageDTO(from: message)
         }
         try await chatRepository.send(this: message,
-                                      isSentByUser: true,
                                       to: chatID)
-        if let message = try await gptRepository?.send(this: message,
+        if let messageDTO = try await gptRepository?.send(this: message.content ?? "",
                                                        and: messages) {
-            try await chatRepository.send(this: message.content,
-                                          isSentByUser: false,
+            let message = Message(dto: messageDTO)
+            try await chatRepository.send(this: message,
                                           to: chatID)
-            return Message(dto: message)
+            return message
         }
-        return Message(role: "assistant",
-                       isSentByUser: false,
-                       state: .error,
-                       content: "Error",
-                       isFile: false)
+        return Message(error: "Call to GPT failed")
     }
 
     func create(with name: String, image: Data?, prompt: String) async throws {

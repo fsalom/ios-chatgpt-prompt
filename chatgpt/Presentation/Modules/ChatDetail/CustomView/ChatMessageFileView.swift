@@ -16,7 +16,10 @@ struct ChatMessageFileView: View {
             Text(messageItem.createdAt.formatTime())
                 .font(.system(size: 10))
                 .foregroundColor(.gray)
-            Text(Image(systemName: "file")).forUserStyle()
+            VStack(alignment: .trailing, content: {
+                Text(Image(systemName: "file")).foregroundColor(.blue)
+                Text(messageItem.filename ?? "").forUserStyle()
+            })
         }.padding(10)
     }
 }
@@ -32,6 +35,7 @@ fileprivate extension Text {
         self.fixedSize(horizontal: false, vertical: true)
             .multilineTextAlignment(.leading)
             .padding(10)
+            .fontWeight(.bold)
             .foregroundColor(.black)
             .background(
                 Rectangle()
