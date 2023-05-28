@@ -69,13 +69,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         }.fileImporter(isPresented: $presentImporter, allowedContentTypes: [.text]) { result in
                             switch result {
                             case .success(let url):
-                                do {
-                                    let text = try String(contentsOf: url)
-                                    viewModel.send(this: text, isFile: true)
-                                } catch {
-
-                                }
-
+                                viewModel.send(this: url)
                             case .failure(let error):
                                 print(error)
                             }
@@ -85,7 +79,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                               text: $viewModel.userNewMessage,
                               axis: .vertical).lineLimit(4)
                         .onSubmit {
-                            viewModel.send(this: viewModel.userNewMessage, isFile: false)
+                            viewModel.send(this: viewModel.userNewMessage)
                         }.padding(10)
                         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
                         .overlay(
@@ -97,11 +91,11 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
 
                     if viewModel.userNewMessage.isEmpty {
                         Button("Enviar") {
-                            viewModel.send(this: viewModel.userNewMessage, isFile: false)
+                            viewModel.send(this: viewModel.userNewMessage)
                         }.disabled(viewModel.userNewMessage.isEmpty)
                     } else {
                         Button {
-                            viewModel.send(this: viewModel.userNewMessage, isFile: false)
+                            viewModel.send(this: viewModel.userNewMessage)
                         } label: {
                             Image(systemName: "paperplane.fill").rotationEffect(Angle(degrees: 45))
                         } .frame(width: 40, height: 40)

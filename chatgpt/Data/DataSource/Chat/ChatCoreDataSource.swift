@@ -83,7 +83,7 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         guard let chat = chatsCD.first else { return }
         guard let messages = chat.messages else { return }
         for message in messages {
-            try context.delete(message as! NSManagedObject)
+            context.delete(message as! NSManagedObject)
         }
         try context.save()
     }

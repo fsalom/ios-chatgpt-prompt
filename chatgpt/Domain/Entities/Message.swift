@@ -50,7 +50,7 @@ class Message: Identifiable, Equatable {
         createdAt = coredata.createdAt
         isSentByUser = coredata.isSentByUser
         isFile = coredata.isFile
-        state = isFile(this: coredata.content) ? .file : self.state
+        state = isFile ? .file : self.state
     }
 
     init(role: String,
@@ -67,13 +67,21 @@ class Message: Identifiable, Equatable {
         self.isFile = isFile
     }
 
-    func isFile(this text: String) -> Bool {
-        let characters: [Character] = [",", ";"]
-        for character in characters {
-            if text.filter({ $0 == character }).count > 6 {
-                return true
-            }
-        }
-        return false
+    /// Error init
+    init(error: String) {
+        self.role = "assistant"
+        self.isSentByUser = false
+        self.state =  .error
+        self.content = error
+        self.isFile = false
+    }
+
+    /// Loading init
+    init() {
+        self.role = "assistant"
+        self.isSentByUser = false
+        self.state =  .loading
+        self.content = ""
+        self.isFile = false
     }
 }

@@ -45,53 +45,60 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
         }
     }
 
-    func send(this message: String, isFile: Bool) {
+    func send(this message: String) {
         let loadingMessage = getLoadingAndSetMessageForUser(with: message,
-                                                            and: isFile)
+                                                            isFile: false)
+        setAndCall(with: message, for: loadingMessage.id)
+        userNewMessage = ""
+    }
+
+    func send(this file: URL) {
+        guard let text = try? String(contentsOf: file) else { return }
+        let loadingMessage = getLoadingAndSetMessageForUser(with: text,
+                                                            isFile: true)
+        setAndCall(with: text, for: loadingMessage.id)
+        userNewMessage = ""
+    }
+
+    func setAndCall(with message: String, for id: UUID) {
         Task {
             do {
                 let gptmessage = try await useCase.sendToGPT(this: message,
                                                              with: messages,
                                                              for: chat.id)
-                await MainActor.run {
-                    messages.removeAll(where: { $0.id == loadingMessage.id })
-                    messages.append(gptmessage)
-                }
+                await replace(this: id, with: gptmessage)
             } catch {
-                await MainActor.run {
-                    messages.removeAll(where: { $0.id == loadingMessage.id })
-                    guard let GPTError = error as? GPTError else { return }
-                    switch GPTError {
-                    case .custom(let string, let code):
-                        let errorMessage = Message(role: "assistant",
-                                                   isSentByUser: false,
-                                                   state: .error,
-                                                   content: string,
-                                                   isFile: false)
-                        if code == "context_length_exceeded" {
-                            isFlushRequired = true
-                        }
-                        messages.append(errorMessage)
+                guard let GPTError = error as? GPTError else {
+                    await replace(this: id, with: Message(error: "Unknown"))
+                    return
+                }
+                switch GPTError {
+                case .custom(let error, let code):
+                    let errorMessage = Message(error: error)
+                    if code == "context_length_exceeded" {
+                        isFlushRequired = true
                     }
-
+                    await replace(this: id, with: errorMessage)
                 }
             }
         }
-        userNewMessage = ""
     }
 
-    func getLoadingAndSetMessageForUser(with message: String, and isFile: Bool) -> Message {
+    func getLoadingAndSetMessageForUser(with message: String, isFile: Bool) -> Message {
         self.messages.append(Message(role: "user",
                                      isSentByUser: true,
                                      state: .success,
                                      content: message,
                                      isFile: isFile))
-        let newMessage = Message(role: "assistant",
-                                 isSentByUser: false,
-                                 state: .loading,
-                                 content: "",
-                                 isFile: false)
-        messages.append(newMessage)
-        return newMessage
+        let loadingMessage = Message()
+        messages.append(loadingMessage)
+        return loadingMessage
+    }
+
+    func replace(this id: UUID, with message: Message) async {
+        await MainActor.run {
+            messages.removeAll(where: { $0.id == id })
+            messages.append(message)
+        }
     }
 }
