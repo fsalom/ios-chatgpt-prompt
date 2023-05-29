@@ -14,24 +14,26 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     var useCase: ChatUseCaseProtocol!
     var chat: Chat
+    var prompt: Message
 
     init(with chat: Chat, and useCase: ChatUseCaseProtocol) {
         self.useCase = useCase
         self.chat = chat
         self.messages = []
-        self.messages.append(Message(role: "user",
-                                     isSentByUser: true,
-                                     state: .success,
-                                     createdAt: chat.createdAt,
-                                     content: chat.prompt,
-                                     isFile: false))
+        self.prompt = Message(role: "user",
+                              isSentByUser: true,
+                              state: .success,
+                              createdAt: chat.createdAt,
+                              content: chat.prompt,
+                              isFile: false)
     }
 
     func clean() {
         Task {
             try? useCase.clean(this: chat)
             await MainActor.run {
-                self.messages = []
+                self.messages.removeAll()
+                self.messages.append(self.prompt)
             }
         }
     }
@@ -40,9 +42,15 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
         Task {
             let messages = try await useCase.getMessages(for: chat.id)
             await MainActor.run {
+                self.messages.removeAll()
+                self.messages.append(self.prompt)
                 self.messages.append(contentsOf: messages)
             }
         }
+    }
+
+    func getDocuments() -> [Message] {
+        return self.messages.filter({ $0.isFile })
     }
 
     func send(this message: String) {
@@ -53,13 +61,16 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
     }
 
     func send(this file: URL) {
-        guard let text = try? String(contentsOf: file) else { return }
-        let filename = file.pathComponents.last
-        let (loadingMessage, message) = getLoadingAndSetMessageForUser(with: text,
-                                                                       and: filename,
-                                                                       isFile: true)
-        setAndCall(with: message, for: loadingMessage.id)
-        userNewMessage = ""
+        if file.startAccessingSecurityScopedResource() {
+            guard let text = try? String(contentsOf: file) else { return }
+            let filename = file.pathComponents.last
+            let (loadingMessage, message) = getLoadingAndSetMessageForUser(with: text,
+                                                                           and: filename,
+                                                                           isFile: true)
+            setAndCall(with: message, for: loadingMessage.id)
+            userNewMessage = ""
+        }
+        file.stopAccessingSecurityScopedResource()
     }
 
     func setAndCall(with message: Message, for id: UUID) {

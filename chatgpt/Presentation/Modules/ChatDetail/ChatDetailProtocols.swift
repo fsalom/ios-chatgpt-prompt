@@ -13,6 +13,7 @@ protocol ChatDetailViewModelProtocol: ObservableObject {
     var isFlushRequired: Bool { get set }
     func send(this message: String)
     func send(this file: URL)
+    func getDocuments() -> [Message]
     func clean()
     func load()
 }

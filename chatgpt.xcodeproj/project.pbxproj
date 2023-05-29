@@ -34,6 +34,7 @@
 		C1542DE92A12611900E2EFAD /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DE82A12611900E2EFAD /* Image+Data.swift */; };
 		C1821AF02A1FE2D900539D30 /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1821AEF2A1FE2D900539D30 /* ErrorDTO.swift */; };
 		C1821AF22A20D66B00539D30 /* ChatMessageFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1821AF12A20D66B00539D30 /* ChatMessageFileView.swift */; };
+		C1821AF52A23D42200539D30 /* ChatFilePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1821AF42A23D42200539D30 /* ChatFilePreviewer.swift */; };
 		C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE0C2A0587820008A931 /* chatgptApp.swift */; };
 		C18BEE0F2A0587820008A931 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE0E2A0587820008A931 /* Persistence.swift */; };
 		C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE102A0587820008A931 /* chatgpt.xcdatamodeld */; };
@@ -97,6 +98,7 @@
 		C1542DE82A12611900E2EFAD /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		C1821AEF2A1FE2D900539D30 /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
 		C1821AF12A20D66B00539D30 /* ChatMessageFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageFileView.swift; sourceTree = "<group>"; };
+		C1821AF42A23D42200539D30 /* ChatFilePreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFilePreviewer.swift; sourceTree = "<group>"; };
 		C18BEE092A0587820008A931 /* chatgpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatgpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18BEE0C2A0587820008A931 /* chatgptApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatgptApp.swift; sourceTree = "<group>"; };
 		C18BEE0E2A0587820008A931 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -264,11 +266,12 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		C1821AF32A23D1A300539D30 /* ChatPreviewer */ = {
+		C1821AF32A23D1A300539D30 /* ChatFilePreviewer */ = {
 			isa = PBXGroup;
 			children = (
+				C1821AF42A23D42200539D30 /* ChatFilePreviewer.swift */,
 			);
-			path = ChatPreviewer;
+			path = ChatFilePreviewer;
 			sourceTree = "<group>";
 		};
 		C18BEE002A0587820008A931 = {
@@ -391,7 +394,7 @@
 		C18BEE422A0588740008A931 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				C1821AF32A23D1A300539D30 /* ChatPreviewer */,
+				C1821AF32A23D1A300539D30 /* ChatFilePreviewer */,
 				C1542D9E2A0FED5900E2EFAD /* ChatNew */,
 				C18BEE542A065FE80008A931 /* ChatDetail */,
 				C18BEE462A059F3C0008A931 /* Menu */,
@@ -599,6 +602,7 @@
 				C1542D752A0CEEC700E2EFAD /* ChatRemoteDataSource.swift in Sources */,
 				C1542D792A0D223700E2EFAD /* GPTDataSource.swift in Sources */,
 				C1542D942A0E3F1D00E2EFAD /* ChatMessageLoadingView.swift in Sources */,
+				C1821AF52A23D42200539D30 /* ChatFilePreviewer.swift in Sources */,
 				C18BEE122A0587820008A931 /* chatgpt.xcdatamodeld in Sources */,
 				C1542DA02A0FED7000E2EFAD /* ChatNewView.swift in Sources */,
 				C18BEE452A059E720008A931 /* ChatListView.swift in Sources */,
@@ -776,7 +780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = chatgpt/chatgpt.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"chatgpt/Preview Content\"";
@@ -815,7 +819,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = chatgpt/chatgpt.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"chatgpt/Preview Content\"";

@@ -29,7 +29,11 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                                 case .loading:
                                     ChatMessageLoadingView().id(message.id)
                                 case .file:
-                                    ChatMessageFileView(messageItem: message).id(message.id)
+                                    NavigationLink {
+                                        ChatFilePreviewer(message: message)
+                                    } label: {
+                                        ChatMessageFileView(messageItem: message).id(message.id)
+                                    }
                                 }
                                 if !message.isSentByUser { Spacer() }
                             }
@@ -44,11 +48,9 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     }
                     .onChange(of: scrollToBottom) { shouldScroll in
                         if shouldScroll {
-                            withAnimation {
-                                guard let lastMessage = viewModel.messages.last else { return }
-                                value.scrollTo(lastMessage.id, anchor: .bottom)
-                            }
                             scrollToBottom = false
+                            guard let lastMessage = viewModel.messages.last else { return }
+                            value.scrollTo(lastMessage.id, anchor: .bottom)
                         }
                     }
                 }
@@ -59,6 +61,20 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     }.frame(maxWidth: .infinity, maxHeight: 44, alignment: .center)
                         .background(.red)
                         .foregroundColor(.white)
+                }
+                if viewModel.getDocuments().count > 0 {
+                    ScrollView(.horizontal){
+                        HStack {
+                            Text("Docs:")
+                            ForEach(viewModel.getDocuments()) { message in
+                                NavigationLink {
+                                    ChatFilePreviewer(message: message)
+                                } label: {
+                                    Text(message.filename ?? "sin nombre").bubbleStyle()
+                                }
+                            }
+                        }
+                    }.padding(5)
                 }
                 HStack(alignment: viewModel.userNewMessage.isEmpty ? .center : .bottom) {
                     if viewModel.userNewMessage.isEmpty {
@@ -104,15 +120,25 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                             .clipShape(Circle())
                             .disabled(viewModel.userNewMessage.isEmpty)
                     }
-
                 }
                 .padding()
                 .background(Color.gray.opacity(0.2))
             }
-
         }.onAppear {
             viewModel.load()
         }
+    }
+}
+
+extension Text {
+    func bubbleStyle() -> some View {
+        self.padding(10)
+        .foregroundColor(.black)
+        .background(
+            Rectangle()
+                .fill(Color.init(uiColor: .init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)))
+        )
+        .cornerRadius(15)
     }
 }
 
