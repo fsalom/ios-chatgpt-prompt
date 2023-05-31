@@ -17,7 +17,7 @@ struct ChatMessageFileView: View {
                 .font(.system(size: 10))
                 .foregroundColor(.gray)
             VStack(alignment: .trailing, content: {
-                Text(Image(systemName: "file")).foregroundColor(.blue)
+                Text(Image(systemName: "doc.fill")).foregroundColor(.blue)
                 Text(messageItem.filename ?? "").forUserStyle()
             })
         }.padding(10)

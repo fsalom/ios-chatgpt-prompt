@@ -12,6 +12,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     @ObservedObject var viewModel: VM
     @State private var scrollToBottom: Bool = false
     @State private var presentImporter: Bool = false
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         ZStack {
@@ -50,7 +51,9 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         if shouldScroll {
                             scrollToBottom = false
                             guard let lastMessage = viewModel.messages.last else { return }
-                            value.scrollTo(lastMessage.id, anchor: .bottom)
+                            withAnimation {
+                                value.scrollTo(lastMessage.id, anchor: .bottom)
+                            }
                         }
                     }
                 }
@@ -93,10 +96,16 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     }
                     TextField("Escribe aquí...",
                               text: $viewModel.userNewMessage,
-                              axis: .vertical).lineLimit(4)
+                              axis: .vertical)
+                        .lineLimit(4)
+                        .focused($isFocused)
+                        .onChange(of: isFocused) { isFocused in
+                            scrollToBottom = true
+                        }
                         .onSubmit {
                             viewModel.send(this: viewModel.userNewMessage)
-                        }.padding(10)
+                        }
+                        .padding(10)
                         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
@@ -127,18 +136,21 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
         }.onAppear {
             viewModel.load()
         }
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
     }
 }
 
 extension Text {
     func bubbleStyle() -> some View {
         self.padding(10)
-        .foregroundColor(.black)
-        .background(
-            Rectangle()
-                .fill(Color.init(uiColor: .init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)))
-        )
-        .cornerRadius(15)
+            .foregroundColor(.black)
+            .background(
+                Rectangle()
+                    .fill(Color.init(uiColor: .init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)))
+            )
+            .cornerRadius(15)
     }
 }
 
