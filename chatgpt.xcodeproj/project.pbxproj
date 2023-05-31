@@ -397,8 +397,8 @@
 				C1821AF32A23D1A300539D30 /* ChatFilePreviewer */,
 				C1542D9E2A0FED5900E2EFAD /* ChatNew */,
 				C18BEE542A065FE80008A931 /* ChatDetail */,
-				C18BEE462A059F3C0008A931 /* Menu */,
 				C18BEE432A0588A70008A931 /* ChatList */,
+				C18BEE462A059F3C0008A931 /* Menu */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

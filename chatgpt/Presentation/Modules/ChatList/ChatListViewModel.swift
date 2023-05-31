@@ -10,18 +10,12 @@ import CoreData
 
 class ChatListViewModel: ObservableObject, ChatListViewModelProtocol {
     @Published var chats: [Chat]
-    let container = NSPersistentContainer(name: "Chat")
     
     var useCase: ChatUseCaseProtocol!
 
     init(useCase: ChatUseCaseProtocol) {
         self.useCase = useCase
         self.chats = []
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                print("Core Data failed to load: \(error.localizedDescription)")
-            }
-        }
     }
     
     func load() {
