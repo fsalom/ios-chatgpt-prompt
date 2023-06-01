@@ -50,7 +50,7 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
                 Button("Guardar") {
                     Task {
                         do {
-                            try await viewModel.create()
+                            try await viewModel.action()
                             dismiss()
                         } catch {
 
