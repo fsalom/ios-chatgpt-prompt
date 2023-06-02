@@ -17,7 +17,7 @@ struct ChatListView<VM>: View where VM: ChatListViewModelProtocol {
                 ScrollViewReader { value in
                     ForEach(viewModel.chats, id: \.id) { chat in
                         NavigationLink(destination: ChatDetailBuilder().build(with: chat)) {
-                            ChatListMessageView(chat: chat)                   
+                            ChatListMessageView(chat: chat)
                         }.buttonStyle(PlainButtonStyle())
                     }.onAppear {
                         viewModel.load()
@@ -30,7 +30,7 @@ struct ChatListView<VM>: View where VM: ChatListViewModelProtocol {
                         NavigationLink {
                             ChatNewBuilder().build()
                         } label: {
-                            Label("Nuevo chat", systemImage: "square.and.pencil")
+                            Label("Nuevo chat", systemImage: "plus")
                                 .foregroundColor(.black)
                         }
                     }

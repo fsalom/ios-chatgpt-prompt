@@ -31,10 +31,18 @@ struct ChatNewView<VM>: View where VM: ChatNewViewModelProtocol  {
                                     .frame(width: 50, height: 50)
                                     .clipShape(Circle())
                             }else{
-                                Image(systemName: "camera")
-                                    .foregroundColor(.white)
-                                    .imageScale(.small)
-                                    .frame(width: 44, height: 40)
+                                if let image = viewModel.image {
+                                    Image(data: image)!
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                } else {
+                                    Image(systemName: "camera")
+                                        .foregroundColor(.white)
+                                        .imageScale(.small)
+                                        .frame(width: 44, height: 40)
+                                }
                             }
                         }.padding()
                     }

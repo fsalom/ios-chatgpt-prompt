@@ -9,24 +9,15 @@ import Foundation
 import CoreData
 
 class ChatDataSource: ChatDataSourceProtocol {
-    func send(this message: Message, to chatID: String) async throws {
-        
-    }
+    func send(this message: Message, to chatID: String) async throws { }
 
-    func getMessages(for chatID: String) async throws -> [Message] {
-        return []
-    }
+    func getMessages(for chatID: String) async throws -> [Message] { return [] }
 
-    func create(with name: String, image: Data?, prompt: String) async throws {
-        
-    }
+    func create(with name: String, image: Data?, prompt: String) async throws { }
 
+    func edit(this chat: Chat) async throws { }
 
-    func getChats() async throws -> [Chat] {
-        return []
-    }
+    func getChats() async throws -> [Chat] { return [] }
 
-    func clean(this chat: Chat) {
-        
-    }
+    func clean(this chat: Chat) { }
 }

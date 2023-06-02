@@ -139,6 +139,17 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
+        .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem {
+                    NavigationLink {
+                        ChatNewBuilder().build(with: viewModel.chat)
+                    } label: {
+                        Label("Editar", systemImage: "pencil")
+                            .foregroundColor(.black)
+                    }
+                }
+            }
     }
 }
 

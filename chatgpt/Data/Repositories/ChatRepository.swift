@@ -11,6 +11,7 @@ protocol ChatRepositoryProtocol {
     func getMessages(for chatID: String) async throws -> [Message]
     func getChats() async throws -> [Chat]
     func create(with name: String, image: Data?, prompt: String) async throws
+    func edit(this chat: Chat) async throws
     func send(this message: Message, to chatID: String) async throws
     func clean(this chat: Chat) throws
 }
@@ -30,6 +31,10 @@ class ChatRepository: ChatRepositoryProtocol {
         return try await datasource.create(with: name, image: image, prompt: prompt)
     }
 
+    func edit(this chat: Chat) async throws {
+        return try await datasource.edit(this: chat)
+    }
+
     func getChats() async throws -> [Chat] {
         return try await datasource.getChats()
     }
@@ -37,6 +42,7 @@ class ChatRepository: ChatRepositoryProtocol {
     func send(this message: Message, to chatID: String) async throws {
         try await datasource.send(this: message, to: chatID)
     }
+
     func clean(this chat: Chat) throws {
         try datasource.clean(this: chat)
     }

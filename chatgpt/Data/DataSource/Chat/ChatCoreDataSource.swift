@@ -59,6 +59,17 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         try context.save()
     }
 
+    func edit(this chat: Chat) async throws {
+        let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest(for: chat.id)
+        let chatsCD = try context.fetch(request)
+        guard let chatCD = chatsCD.first else { return }
+        chatCD.name = chat.name
+        chatCD.prompt = chat.prompt
+        chatCD.profileImage = chat.profileImage
+        chatCD.updatedAt = Date()
+        try context.save()
+    }
+
     func send(this message: Message, to chatID: String) async throws {
         // PersistenceController.shared.whereIsMySQLite()
         let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest()

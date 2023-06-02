@@ -39,7 +39,12 @@ class ChatNewViewModel: ChatNewViewModelProtocol {
     }
 
     func edit() async throws {
-        guard let chat else { return }
+        guard var chat else { return }
+        chat.name = name
+        chat.prompt = prompt
+        if let image {
+            chat.profileImage = image
+        }
         try await useCase.edit(this: chat)
     }
 
