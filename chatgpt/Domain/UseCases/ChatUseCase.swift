@@ -11,6 +11,7 @@ import Foundation
 protocol ChatUseCaseProtocol {
     func getMessages(for chatID: String) async throws -> [Message]
     func getChats() async throws -> [Chat]
+    func getChat(with id: String) async throws -> Chat
     func sendToGPT(this message: Message,
                    with context: [Message],
                    for chatID: String) async throws -> Message
@@ -34,6 +35,10 @@ class ChatUseCase: ChatUseCaseProtocol {
 
     func getChats() async throws -> [Chat] {
         try await chatRepository.getChats()
+    }
+
+    func getChat(with id: String) async throws -> Chat {
+        try await chatRepository.getChat(with: id)
     }
 
     func sendToGPT(this message: Message,

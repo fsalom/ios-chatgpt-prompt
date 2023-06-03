@@ -14,12 +14,15 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     var useCase: ChatUseCaseProtocol!
     var chat: Chat
-    var prompt: Message
+    var prompt: Message!
 
     init(with chat: Chat, and useCase: ChatUseCaseProtocol) {
         self.useCase = useCase
         self.chat = chat
         self.messages = []
+    }
+
+    func setPrompt() {
         self.prompt = Message(role: "user",
                               isSentByUser: true,
                               state: .success,
@@ -33,6 +36,7 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
             try? useCase.clean(this: chat)
             await MainActor.run {
                 self.messages.removeAll()
+                self.setPrompt()
                 self.messages.append(self.prompt)
             }
         }
@@ -40,9 +44,11 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     func load() {
         Task {
+            self.chat = try await useCase.getChat(with: chat.id)
             let messages = try await useCase.getMessages(for: chat.id)
             await MainActor.run {
                 self.messages.removeAll()
+                self.setPrompt()
                 self.messages.append(self.prompt)
                 self.messages.append(contentsOf: messages)
             }

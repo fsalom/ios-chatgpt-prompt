@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 
+enum CoreDataError: Error {
+    case notFound
+}
+
 class ChatCoreDataSource: ChatDataSourceProtocol {
 
     var context: NSManagedObjectContext
@@ -44,6 +48,14 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
             chats.append(Chat(with: chat))
         }
         return chats
+    }
+
+    func getChat(with id: String) async throws -> Chat {
+        let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest(for: id)
+        let chatsCD = try context.fetch(request)
+        guard let chatCD = chatsCD.first else { throw CoreDataError.notFound }
+        let chat = Chat(with: chatCD)
+        return chat
     }
 
     func create(with name: String, image: Data?, prompt: String) async throws {

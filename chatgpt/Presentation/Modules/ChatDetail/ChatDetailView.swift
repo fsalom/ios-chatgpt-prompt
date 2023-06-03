@@ -13,10 +13,12 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     @State private var scrollToBottom: Bool = false
     @State private var presentImporter: Bool = false
     @FocusState private var isFocused: Bool
+    @State private var goToEdit: Bool = false
 
     var body: some View {
         ZStack {
             VStack {
+                NavigationLink(destination: ChatNewBuilder().build(with: viewModel.chat), isActive: $goToEdit) { EmptyView() }
                 ScrollViewReader { value in
                     ScrollView {
                         ForEach(viewModel.messages, id: \.id) { message in
@@ -140,16 +142,24 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem {
-                    NavigationLink {
-                        ChatNewBuilder().build(with: viewModel.chat)
-                    } label: {
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button(action: {
+                        goToEdit = true
+                    }) {
                         Label("Editar", systemImage: "pencil")
-                            .foregroundColor(.black)
                     }
+                    Button(action: {
+                        viewModel.clean()
+                    }) {
+                        Label("Eliminar", systemImage: "trash")
+                    }
+                } label: {
+                    Label("Opciones", systemImage: "ellipsis")
                 }
             }
+        }
     }
 }
 

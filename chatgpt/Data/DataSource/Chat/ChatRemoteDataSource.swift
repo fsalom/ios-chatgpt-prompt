@@ -19,5 +19,12 @@ class ChatDataSource: ChatDataSourceProtocol {
 
     func getChats() async throws -> [Chat] { return [] }
 
+    func getChat(with id: String) async throws -> Chat { return Chat(profileImage: Data(),
+                                                                     name: "",
+                                                                     id: "",
+                                                                     prompt: "",
+                                                                     updatedAt: Date(),
+                                                                     createdAt: Date()) }
+
     func clean(this chat: Chat) { }
 }
