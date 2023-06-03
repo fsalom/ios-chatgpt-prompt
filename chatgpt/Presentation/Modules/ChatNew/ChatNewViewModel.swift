@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 class ChatNewViewModel: ChatNewViewModelProtocol {
     @Published var name =  ""
@@ -35,6 +35,11 @@ class ChatNewViewModel: ChatNewViewModelProtocol {
     }
 
     func create() async throws {
+        if image == nil {
+            await MainActor.run {
+                image = UIImage(named: "logo")?.pngData()
+            }
+        }
         try await useCase.create(with: name, image: image, prompt: prompt)
     }
 
