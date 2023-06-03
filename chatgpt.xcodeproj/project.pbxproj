@@ -53,6 +53,7 @@
 		C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */; };
 		C18BEE5A2A0909260008A931 /* ChatDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE592A0909260008A931 /* ChatDetailViewModel.swift */; };
 		C18BEE5C2A09094D0008A931 /* ChatDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE5B2A09094D0008A931 /* ChatDetailProtocols.swift */; };
+		C192BF0E2A2A5B1E00982F33 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C192BF0D2A2A5B1E00982F33 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		C18BEE572A0660650008A931 /* ChatDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailBuilder.swift; sourceTree = "<group>"; };
 		C18BEE592A0909260008A931 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
 		C18BEE5B2A09094D0008A931 /* ChatDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailProtocols.swift; sourceTree = "<group>"; };
+		C192BF0D2A2A5B1E00982F33 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +396,7 @@
 		C18BEE422A0588740008A931 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C192BF0C2A2A5AFD00982F33 /* Splash */,
 				C1821AF32A23D1A300539D30 /* ChatFilePreviewer */,
 				C1542D9E2A0FED5900E2EFAD /* ChatNew */,
 				C18BEE542A065FE80008A931 /* ChatDetail */,
@@ -450,6 +453,14 @@
 				C18BEE592A0909260008A931 /* ChatDetailViewModel.swift */,
 			);
 			path = ChatDetail;
+			sourceTree = "<group>";
+		};
+		C192BF0C2A2A5AFD00982F33 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				C192BF0D2A2A5B1E00982F33 /* SplashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -599,6 +610,7 @@
 				C1542DE92A12611900E2EFAD /* Image+Data.swift in Sources */,
 				C18BEE0D2A0587820008A931 /* chatgptApp.swift in Sources */,
 				C1542D8C2A0D271400E2EFAD /* GPTRepository.swift in Sources */,
+				C192BF0E2A2A5B1E00982F33 /* SplashView.swift in Sources */,
 				C1542D752A0CEEC700E2EFAD /* ChatRemoteDataSource.swift in Sources */,
 				C1542D792A0D223700E2EFAD /* GPTDataSource.swift in Sources */,
 				C1542D942A0E3F1D00E2EFAD /* ChatMessageLoadingView.swift in Sources */,
@@ -789,7 +801,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = ChatBot;
+				INFOPLIST_KEY_CFBundleDisplayName = "Feed my context";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -831,7 +844,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = ChatBot;
+				INFOPLIST_KEY_CFBundleDisplayName = "Feed my context";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
