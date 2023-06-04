@@ -14,10 +14,12 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     @State private var presentImporter: Bool = false
     @FocusState private var isFocused: Bool
     @State private var goToEdit: Bool = false
+    @State private var goToImage: Bool = false
 
     var body: some View {
         ZStack {
             VStack {
+                NavigationLink(destination: Image(data: viewModel.chat.profileImage)?.resizable().scaledToFit(), isActive: $goToImage) { EmptyView() }
                 NavigationLink(destination: ChatNewBuilder().build(with: viewModel.chat), isActive: $goToEdit) { EmptyView() }
                 ScrollViewReader { value in
                     ScrollView {
@@ -143,6 +145,19 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                if let image = Image(data: viewModel.chat.profileImage) {
+                    Button(action: {
+                        goToImage = true
+                    }) {
+                        image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                    }
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button(action: {

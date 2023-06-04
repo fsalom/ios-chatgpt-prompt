@@ -34,10 +34,16 @@ class ChatNewViewModel: ChatNewViewModelProtocol {
         }
     }
 
+    func getRandomProfileImageName() -> String {
+        let images = ["girl1", "girl2", "girl3", "girl4", "girl5", "girl6", "man1", "man2", "lion1", "lion2", "lion3"]
+        return images.randomElement() ?? "logo"
+    }
+
     func create() async throws {
         if image == nil {
+
             await MainActor.run {
-                image = UIImage(named: "logo")?.pngData()
+                image = UIImage(named: getRandomProfileImageName())?.pngData()
             }
         }
         try await useCase.create(with: name, image: image, prompt: prompt)
