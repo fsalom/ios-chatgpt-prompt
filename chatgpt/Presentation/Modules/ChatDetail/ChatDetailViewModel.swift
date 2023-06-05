@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import GPT3_Tokenizer
 
 class ChatDetailViewModel: ChatDetailViewModelProtocol {
     @Published var userNewMessage =  ""
     @Published var isFlushRequired = false
     @Published var messages: [Message]
+    @Published var progress: Float = 0
 
     var useCase: ChatUseCaseProtocol!
     var chat: Chat
@@ -51,8 +53,29 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
                 self.setPrompt()
                 self.messages.append(self.prompt)
                 self.messages.append(contentsOf: messages)
+                self.progress =  getProgressTokenBar()
             }
         }
+    }
+
+    func getProgressTokenBar() -> Float {
+        let tokens = getWords()
+        let progress: Float = (Float(tokens) / 4097) * 100
+        if progress > 100 {
+            isFlushRequired = true
+        }
+        return Float(progress)
+    }
+
+    func getWords() -> Int {
+        let gp3tokenizer = GPT3Tokenizer()
+        var totalWords: Int = 0
+        for message in messages {
+            guard let text = message.content else { continue }
+            let tokens = gp3tokenizer.encoder.enconde(text: text)
+            totalWords += tokens.count
+        }
+        return totalWords
     }
 
     func getDocuments() -> [Message] {
@@ -118,6 +141,7 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
             isFlushRequired = code == "context_length_exceeded" ? true : false
             messages.removeAll(where: { $0.id == id })
             messages.append(message)
+            self.progress = getProgressTokenBar()
         }
     }
 }
