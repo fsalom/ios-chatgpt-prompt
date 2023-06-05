@@ -13,6 +13,14 @@ public class ChatMessageCD: NSManagedObject, Identifiable {
         return NSFetchRequest<ChatMessageCD>(entityName: "ChatMessage")
     }
 
+    @nonobjc public class func fetchRequest(for id: String) -> NSFetchRequest<ChatMessageCD> {
+        let fetchRequest: NSFetchRequest<ChatMessageCD> = ChatMessageCD.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "chatID == %@", id)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+
+        return fetchRequest
+    }
+
     @NSManaged public var id: String
     @NSManaged public var content: String
     @NSManaged public var role: String

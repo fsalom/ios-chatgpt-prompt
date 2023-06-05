@@ -32,6 +32,7 @@
 		C1542DA62A0FEE0100E2EFAD /* ChatNewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DA52A0FEE0100E2EFAD /* ChatNewProtocols.swift */; };
 		C1542DA82A1007B400E2EFAD /* ChatCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DA72A1007B400E2EFAD /* ChatCoreDataSource.swift */; };
 		C1542DE92A12611900E2EFAD /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542DE82A12611900E2EFAD /* Image+Data.swift */; };
+		C1742E3B2A2E05750020354D /* GPT3 Tokenizer in Frameworks */ = {isa = PBXBuildFile; productRef = C1742E3A2A2E05750020354D /* GPT3 Tokenizer */; };
 		C1821AF02A1FE2D900539D30 /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1821AEF2A1FE2D900539D30 /* ErrorDTO.swift */; };
 		C1821AF22A20D66B00539D30 /* ChatMessageFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1821AF12A20D66B00539D30 /* ChatMessageFileView.swift */; };
 		C1821AF52A23D42200539D30 /* ChatFilePreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1821AF42A23D42200539D30 /* ChatFilePreviewer.swift */; };
@@ -130,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1742E3B2A2E05750020354D /* GPT3 Tokenizer in Frameworks */,
 				C1542D7C2A0D255100E2EFAD /* TripleA in Frameworks */,
 				C1542D9B2A0E41F400E2EFAD /* Lottie in Frameworks */,
 			);
@@ -482,6 +484,7 @@
 			packageProductDependencies = (
 				C1542D7B2A0D255100E2EFAD /* TripleA */,
 				C1542D9A2A0E41F400E2EFAD /* Lottie */,
+				C1742E3A2A2E05750020354D /* GPT3 Tokenizer */,
 			);
 			productName = chatgpt;
 			productReference = C18BEE092A0587820008A931 /* chatgpt.app */;
@@ -558,6 +561,7 @@
 			packageReferences = (
 				C1542D7A2A0D255100E2EFAD /* XCRemoteSwiftPackageReference "TripleA" */,
 				C1542D992A0E41F400E2EFAD /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				C1742E392A2E05750020354D /* XCRemoteSwiftPackageReference "GPT3-Tokenizer" */,
 			);
 			productRefGroup = C18BEE0A2A0587820008A931 /* Products */;
 			projectDirPath = "";
@@ -1020,6 +1024,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		C1742E392A2E05750020354D /* XCRemoteSwiftPackageReference "GPT3-Tokenizer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aespinilla/GPT3-Tokenizer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1032,6 +1044,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C1542D992A0E41F400E2EFAD /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		C1742E3A2A2E05750020354D /* GPT3 Tokenizer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1742E392A2E05750020354D /* XCRemoteSwiftPackageReference "GPT3-Tokenizer" */;
+			productName = "GPT3 Tokenizer";
 		};
 /* End XCSwiftPackageProductDependency section */
 

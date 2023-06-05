@@ -21,27 +21,18 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
     }
 
     func getMessages(for chatID: String) async throws -> [Message] {
-        let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest(for: chatID)
-        let chatsCD = try context.fetch(request)
-        guard let chat = chatsCD.first else { return [] }
-        if let chatMessages = chat.messages {
-            let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
-            let sortedMessages = chatMessages.sortedArray(using: [sortDescriptor]) as! [ChatMessageCD]
-
-            var messages: [Message] = []
-            for message in sortedMessages {
-                messages.append(Message(coredata: message))
-            }
-            return messages
+        let request: NSFetchRequest<ChatMessageCD> = ChatMessageCD.fetchRequest(for: chatID)
+        let messagesCD = try context.fetch(request)
+        var messages: [Message] = []
+        for message in messagesCD {
+            messages.append(Message(coredata: message))
         }
-        return []
+        return messages
     }
 
     func getChats() async throws -> [Chat] {
         let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest()
-        let sort = NSSortDescriptor(key: "updatedAt", ascending: false)
         request.returnsObjectsAsFaults = false
-        request.sortDescriptors = [sort]
         let chatsCD = try context.fetch(request)
         var chats: [Chat] = []
         for chat in chatsCD {
@@ -84,7 +75,7 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
 
     func send(this message: Message, to chatID: String) async throws {
         // PersistenceController.shared.whereIsMySQLite()
-        let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest()
+        let request: NSFetchRequest<ChatCD> = ChatCD.fetchRequest(for: chatID)
         let chatsCD = try context.fetch(request)
         guard let chat = chatsCD.first else { return }
         let chatMessage = ChatMessageCD(context: context)
@@ -96,7 +87,8 @@ class ChatCoreDataSource: ChatDataSourceProtocol {
         chatMessage.isFile = message.isFile
         chatMessage.createdAt = Date()
         chatMessage.isSentByUser = message.isSentByUser
-        chat.updatedAt = Date()
+
+        chat.setValue(Date(), forKey: "updatedAt")
         let mutableMessages = chat.mutableSetValue(forKey: "messages")
         mutableMessages.add(chatMessage)
         try context.save()

@@ -11,7 +11,9 @@ import CoreData
 @objc(Chat)
 public class ChatCD: NSManagedObject, Identifiable {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ChatCD> {
-        return NSFetchRequest<ChatCD>(entityName: "Chat")
+        let fetchRequest = NSFetchRequest<ChatCD>(entityName: "Chat")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "updatedAt", ascending: false)]
+        return fetchRequest
     }
 
     @nonobjc public class func fetchRequest(for id: String) -> NSFetchRequest<ChatCD> {

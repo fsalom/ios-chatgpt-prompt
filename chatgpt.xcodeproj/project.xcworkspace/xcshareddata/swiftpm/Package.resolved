@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "gpt3-tokenizer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aespinilla/GPT3-Tokenizer.git",
+      "state" : {
+        "revision" : "cadab0d19a1602cc505493990a9fc4810d8e3070",
+        "version" : "0.1.2"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
