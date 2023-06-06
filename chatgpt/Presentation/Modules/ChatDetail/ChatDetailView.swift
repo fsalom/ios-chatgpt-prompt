@@ -19,7 +19,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
     var body: some View {
         ZStack {
             VStack {
-                ProgressView(value: viewModel.progress, total: 100.0).tint(viewModel.progress > 100 ? .red : .blue)
+                ProgressView(value: viewModel.progress, total: 100.0).tint(viewModel.progress == 100 ? .red : .blue)
                 NavigationLink(destination: Image(data: viewModel.chat.profileImage)?.resizable().scaledToFit(), isActive: $goToImage) { EmptyView() }
                 NavigationLink(destination: ChatNewBuilder().build(with: viewModel.chat), isActive: $goToEdit) { EmptyView() }
                 ScrollViewReader { value in

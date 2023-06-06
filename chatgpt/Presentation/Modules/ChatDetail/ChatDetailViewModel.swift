@@ -60,9 +60,10 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
 
     func getProgressTokenBar() -> Float {
         let tokens = getWords()
-        let progress: Float = (Float(tokens) / 4097) * 100
+        var progress: Float = (Float(tokens) / 4097) * 100
         if progress > 100 {
             isFlushRequired = true
+            return 100
         }
         return Float(progress)
     }
