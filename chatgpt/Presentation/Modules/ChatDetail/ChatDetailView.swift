@@ -169,7 +169,7 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                     Button(action: {
                         viewModel.clean()
                     }) {
-                        Label("Eliminar", systemImage: "trash")
+                        Label("Limpiar", systemImage: "trash")
                     }
                 } label: {
                     Label("Opciones", systemImage: "ellipsis")
