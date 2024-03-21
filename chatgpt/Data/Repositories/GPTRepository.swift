@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol GPTRepositoryProtocol {
-    func send(this prompt: String, and context: [MessageDTO]) async throws -> MessageDTO?
-}
-
 class GPTRepository: GPTRepositoryProtocol {
     var datasource: GPTDataSourceProtocol
 
@@ -18,7 +14,14 @@ class GPTRepository: GPTRepositoryProtocol {
         self.datasource = datasource
     }
 
-    func send(this prompt: String, and context: [MessageDTO]) async throws -> MessageDTO? {
-        return try await datasource.send(this: prompt, and: context)
+    func send(this prompt: String, and context: [MessageDTO]) async throws -> Message? {
+        return try await datasource.send(this: prompt, and: context)?.toDomain()
     }
 }
+
+fileprivate extension MessageDTO {
+    func toDomain() -> Message {
+        Message(role: self.role, content: self.content)
+    }
+}
+
