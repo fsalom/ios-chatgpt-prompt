@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C100FEEA2A18D557005E8862 /* ChatMessageCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C100FEE92A18D557005E8862 /* ChatMessageCD.swift */; };
+		C11776552B2C71DB002F8992 /* GPTRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11776542B2C71DB002F8992 /* GPTRepositoryProtocol.swift */; };
 		C14EFEBC2A179F7D00BA5C82 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14EFEBB2A179F7D00BA5C82 /* Chat.swift */; };
 		C14EFEBF2A18388E00BA5C82 /* ChatProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14EFEBE2A18388E00BA5C82 /* ChatProtocols.swift */; };
 		C1542D712A0CED8400E2EFAD /* ChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1542D702A0CED8400E2EFAD /* ChatUseCase.swift */; };
@@ -76,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		C100FEE92A18D557005E8862 /* ChatMessageCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCD.swift; sourceTree = "<group>"; };
+		C11776542B2C71DB002F8992 /* GPTRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTRepositoryProtocol.swift; sourceTree = "<group>"; };
 		C14EFEBB2A179F7D00BA5C82 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		C14EFEBE2A18388E00BA5C82 /* ChatProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProtocols.swift; sourceTree = "<group>"; };
 		C1542D702A0CED8400E2EFAD /* ChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUseCase.swift; sourceTree = "<group>"; };
@@ -154,6 +156,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C11776512B2C7151002F8992 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				C1542D7E2A0D257A00E2EFAD /* ChatGPTDTO.swift */,
+				C1821AEF2A1FE2D900539D30 /* ErrorDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		C11776522B2C71C3002F8992 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				C11776542B2C71DB002F8992 /* GPTRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		C14EFEBA2A179F5300BA5C82 /* CD */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +195,7 @@
 		C14EFEC02A1838BA00BA5C82 /* GPT */ = {
 			isa = PBXGroup;
 			children = (
+				C11776512B2C7151002F8992 /* DTO */,
 				C1542D782A0D223700E2EFAD /* GPTDataSource.swift */,
 			);
 			path = GPT;
@@ -205,15 +225,6 @@
 				C1542D702A0CED8400E2EFAD /* ChatUseCase.swift */,
 			);
 			path = UseCases;
-			sourceTree = "<group>";
-		};
-		C1542D7D2A0D256400E2EFAD /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				C1542D7E2A0D257A00E2EFAD /* ChatGPTDTO.swift */,
-				C1821AEF2A1FE2D900539D30 /* ErrorDTO.swift */,
-			);
-			path = DTO;
 			sourceTree = "<group>";
 		};
 		C1542D802A0D258900E2EFAD /* Config */ = {
@@ -352,7 +363,6 @@
 			isa = PBXGroup;
 			children = (
 				C14EFEBA2A179F5300BA5C82 /* CD */,
-				C1542D7D2A0D256400E2EFAD /* DTO */,
 				C1542D6E2A0CED6400E2EFAD /* Repositories */,
 				C1542D6D2A0CED5300E2EFAD /* DataSource */,
 				C18BEE3E2A0588240008A931 /* Coredata */,
@@ -372,6 +382,7 @@
 		C18BEE3F2A0588510008A931 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				C11776522B2C71C3002F8992 /* Repositories */,
 				C1542D6F2A0CED7000E2EFAD /* UseCases */,
 				C18BEE492A059FC80008A931 /* Entities */,
 			);
@@ -641,6 +652,7 @@
 				C1542D712A0CED8400E2EFAD /* ChatUseCase.swift in Sources */,
 				C18BEE0F2A0587820008A931 /* Persistence.swift in Sources */,
 				C14EFEBF2A18388E00BA5C82 /* ChatProtocols.swift in Sources */,
+				C11776552B2C71DB002F8992 /* GPTRepositoryProtocol.swift in Sources */,
 				C1542D8A2A0D26C400E2EFAD /* Message.swift in Sources */,
 				C1542DA42A0FEDCD00E2EFAD /* ChatNewViewModel.swift in Sources */,
 				C100FEEA2A18D557005E8862 /* ChatMessageCD.swift in Sources */,
@@ -801,7 +813,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"chatgpt/Preview Content\"";
-				DEVELOPMENT_TEAM = X8Z657K235;
+				DEVELOPMENT_TEAM = 3BJD5A7BSQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -844,7 +856,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"chatgpt/Preview Content\"";
-				DEVELOPMENT_TEAM = X8Z657K235;
+				DEVELOPMENT_TEAM = 3BJD5A7BSQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
