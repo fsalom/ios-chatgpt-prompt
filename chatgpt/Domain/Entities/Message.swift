@@ -37,6 +37,13 @@ class Message: Identifiable, Equatable {
     var filename: String? = ""
     var isFile: Bool = false
 
+    init(role: String, content: String){
+        self.role = role
+        self.content = content
+        state = .success
+        isSentByUser = false
+    }
+
     init(dto: MessageDTO) {
         role = dto.role
         content = dto.content
