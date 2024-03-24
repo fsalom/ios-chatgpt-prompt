@@ -49,9 +49,8 @@ class ChatUseCase: ChatUseCaseProtocol {
         }
         try await chatRepository.send(this: message,
                                       to: chatID)
-        if let messageDTO = try await gptRepository?.send(this: message.content ?? "",
+        if let message = try await gptRepository?.send(this: message.content ?? "",
                                                        and: messages) {
-            let message = Message(dto: messageDTO)
             try await chatRepository.send(this: message,
                                           to: chatID)
             return message
