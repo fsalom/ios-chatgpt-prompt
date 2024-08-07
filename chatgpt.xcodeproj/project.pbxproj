@@ -56,6 +56,7 @@
 		C18BEE5A2A0909260008A931 /* ChatDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE592A0909260008A931 /* ChatDetailViewModel.swift */; };
 		C18BEE5C2A09094D0008A931 /* ChatDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18BEE5B2A09094D0008A931 /* ChatDetailProtocols.swift */; };
 		C192BF0E2A2A5B1E00982F33 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C192BF0D2A2A5B1E00982F33 /* SplashView.swift */; };
+		C1EB945E2C628C9700B9FEFC /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EB945D2C628C9700B9FEFC /* SpeechManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,8 @@
 		C18BEE592A0909260008A931 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
 		C18BEE5B2A09094D0008A931 /* ChatDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailProtocols.swift; sourceTree = "<group>"; };
 		C192BF0D2A2A5B1E00982F33 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		C1EB945D2C628C9700B9FEFC /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
+		C1EB945F2C6290AD00B9FEFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				C1542DE82A12611900E2EFAD /* Image+Data.swift */,
+				C1EB945D2C628C9700B9FEFC /* SpeechManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -312,6 +316,7 @@
 		C18BEE0B2A0587820008A931 /* chatgpt */ = {
 			isa = PBXGroup;
 			children = (
+				C1EB945F2C6290AD00B9FEFC /* Info.plist */,
 				C1542DE72A12610D00E2EFAD /* Helpers */,
 				C1542D952A0E403C00E2EFAD /* Modifier */,
 				C18BEE172A0587840008A931 /* chatgpt.entitlements */,
@@ -642,6 +647,7 @@
 				C1542DA82A1007B400E2EFAD /* ChatCoreDataSource.swift in Sources */,
 				C1542D772A0CF1B700E2EFAD /* ChatCD.swift in Sources */,
 				C1821AF02A1FE2D900539D30 /* ErrorDTO.swift in Sources */,
+				C1EB945E2C628C9700B9FEFC /* SpeechManager.swift in Sources */,
 				C14EFEBC2A179F7D00BA5C82 /* Chat.swift in Sources */,
 				C1542D7F2A0D257A00E2EFAD /* ChatGPTDTO.swift in Sources */,
 				C18BEE582A0660650008A931 /* ChatDetailBuilder.swift in Sources */,
@@ -817,8 +823,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = chatgpt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Feed my context";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Esta app necesita acceso al microfono para poder grabar mensajes";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Esta app necesita acceso para trascribir su voz";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -829,7 +838,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
@@ -860,8 +869,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = chatgpt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Feed my context";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Esta app necesita acceso al microfono para poder grabar mensajes";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Esta app necesita acceso para trascribir su voz";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -872,7 +884,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
