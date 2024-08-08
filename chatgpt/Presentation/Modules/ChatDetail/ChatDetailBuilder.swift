@@ -18,7 +18,7 @@ class ChatDetailBuilder {
 
         let useCase = ChatUseCase(chatRepository: repository, gptRepository: GPTrepository)
 
-        let viewModel = ChatDetailViewModel(with: chat, and: useCase)
+        let viewModel = ChatDetailViewModel(with: chat, and: useCase, speech: SpeechManager())
         let view = ChatDetailView(viewModel: viewModel)
         return view
     }

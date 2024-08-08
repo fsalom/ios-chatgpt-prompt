@@ -7,21 +7,25 @@
 
 import Foundation
 import GPT3_Tokenizer
+import Speech
 
 class ChatDetailViewModel: ChatDetailViewModelProtocol {
     @Published var userNewMessage =  ""
     @Published var isFlushRequired = false
     @Published var messages: [Message]
     @Published var progress: Float = 0
+    @Published var isRecording: Bool = false
 
     var useCase: ChatUseCaseProtocol!
     var chat: Chat
     var prompt: Message!
+    @Published var speech: SpeechManager
 
-    init(with chat: Chat, and useCase: ChatUseCaseProtocol) {
+    init(with chat: Chat, and useCase: ChatUseCaseProtocol, speech: SpeechManager) {
         self.useCase = useCase
         self.chat = chat
         self.messages = []
+        self.speech = speech
     }
 
     func setPrompt() {
@@ -144,5 +148,15 @@ class ChatDetailViewModel: ChatDetailViewModelProtocol {
             messages.append(message)
             self.progress = getProgressTokenBar()
         }
+    }   
+
+    func startRecording() {
+        isRecording = true
+        speech.startRecording()
+    }
+
+    func stopRecording() {
+        isRecording = false
+        speech.stopRecording()
     }
 }
