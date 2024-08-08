@@ -100,24 +100,50 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         }
                     }
                     TextField("Escribe aquí...",
-                              text: $viewModel.userNewMessage,
+                              text: $viewModel.speech.transcribedText,
                               axis: .vertical)
-                        .lineLimit(4)
-                        .focused($isFocused)
-                        .onChange(of: isFocused) { isFocused in
-                            scrollToBottom = true
-                        }
-                        .onSubmit {
-                            viewModel.send(this: viewModel.userNewMessage)
-                        }
-                        .padding(10)
-                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(lineWidth: 1).fill(Color.gray)
-                        )
-                        .foregroundColor(.black)
+                    .lineLimit(4)
+                    .focused($isFocused)
+                    .onChange(of: isFocused) { isFocused in
+                        scrollToBottom = true
+                    }
+                    .onSubmit {
+                        viewModel.send(this: viewModel.userNewMessage)
+                    }
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(lineWidth: 1).fill(Color.gray)
+                    )
+                    .foregroundColor(.black)
 
+
+                    Button(action: {
+                        if viewModel.isRecording {
+                            viewModel.stopRecording()
+                        } else {
+                            viewModel.startRecording()
+                        }
+                    }) {
+                        if viewModel.isRecording {
+                            Image(systemName: "mic.fill")
+                        } else {
+                            Image(systemName: "mic")
+                        }
+                    }
+                    .onLongPressGesture(minimumDuration: 1, perform: {
+
+                    }, onPressingChanged: { pressing in
+                        if pressing {
+                            viewModel.startRecording()
+                        } else {
+                            viewModel.stopRecording()
+                        }
+                    }).frame(width: 40, height: 40)
+                        .foregroundColor(Color.white)
+                        .background(Color.blue)
+                        .clipShape(Circle())
 
                     if viewModel.userNewMessage.isEmpty {
                         Button("Enviar") {
@@ -152,10 +178,10 @@ struct ChatDetailView<VM>: View where VM: ChatDetailViewModelProtocol  {
                         goToImage = true
                     }) {
                         image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40, height: 40)
+                            .clipShape(Circle())
                     }
                 }
             }
